@@ -72,6 +72,6 @@ model Room {
   name               String
   maxCapacity        Int
   maxCapacityAllowed Float
-  admin              User?    @relation(fields: [adminId], references: [id])
+  admin              User     @relation(fields: [adminId], references: [id])
   adminId            Int
 }
