@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/form-control"
+import { FormControl, FormLabel } from "@chakra-ui/form-control"
 import { Input } from "@chakra-ui/input"
 import { Text } from "@chakra-ui/layout"
 import { forwardRef, PropsWithoutRef } from "react"
