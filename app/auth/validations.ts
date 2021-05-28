@@ -1,19 +1,19 @@
 import * as z from "zod"
 
-const password = z.string().min(10).max(100)
+const password = z.string().min(10, "Ingrese mínimo 10 caracteres.").max(100)
 
 export const Signup = z.object({
-  email: z.string().email(),
+  email: z.string().email("El email es inválido."),
   password,
 })
 
 export const Login = z.object({
-  email: z.string().email(),
+  email: z.string().email("El email es inválido."),
   password: z.string(),
 })
 
 export const ForgotPassword = z.object({
-  email: z.string().email(),
+  email: z.string().email("El email es inválido."),
 })
 
 export const ResetPassword = z

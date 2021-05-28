@@ -3,6 +3,7 @@ import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/core/components/Form"
 import login from "app/auth/mutations/login"
 import { Login } from "app/auth/validations"
+import { Box, Text } from "@chakra-ui/layout"
 
 type LoginFormProps = {
   onSuccess?: () => void
@@ -13,10 +14,8 @@ export const LoginForm = (props: LoginFormProps) => {
 
   return (
     <div>
-      <h1>Login</h1>
-
       <Form
-        submitText="Login"
+        submitText="Iniciar sesión"
         schema={Login}
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {
@@ -25,7 +24,7 @@ export const LoginForm = (props: LoginFormProps) => {
             props.onSuccess?.()
           } catch (error) {
             if (error instanceof AuthenticationError) {
-              return { [FORM_ERROR]: "Sorry, those credentials are invalid" }
+              return { [FORM_ERROR]: "Estos credenciales son inválidos." }
             } else {
               return {
                 [FORM_ERROR]:
@@ -36,17 +35,27 @@ export const LoginForm = (props: LoginFormProps) => {
         }}
       >
         <LabeledTextField name="email" label="Email" placeholder="Email" />
-        <LabeledTextField name="password" label="Password" placeholder="Password" type="password" />
-        <div>
+        <LabeledTextField
+          name="password"
+          label="Contraseña"
+          placeholder="Contraseña"
+          type="password"
+        />
+        <Box mt="0rem" fontSize="sm">
           <Link href={Routes.ForgotPasswordPage()}>
-            <a>Forgot your password?</a>
+            <a>Olvide mi contraseña?</a>
           </Link>
-        </div>
+        </Box>
       </Form>
 
-      <div style={{ marginTop: "1rem" }}>
-        Or <Link href={Routes.SignupPage()}>Sign Up</Link>
-      </div>
+      <Box mt="1rem" textAlign="center">
+        o{" "}
+        <Link href={Routes.SignupPage()}>
+          <Text as="span" cursor="pointer" color="yellow.500">
+            registrate
+          </Text>
+        </Link>
+      </Box>
     </div>
   )
 }

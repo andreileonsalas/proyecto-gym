@@ -1,6 +1,6 @@
 import { useRouter, BlitzPage, Routes } from "blitz"
-import Layout from "app/core/layouts/Layout"
 import { SignupForm } from "app/auth/components/SignupForm"
+import AuthLayout from "../layouts/AuthLayout"
 
 const SignupPage: BlitzPage = () => {
   const router = useRouter()
@@ -13,6 +13,6 @@ const SignupPage: BlitzPage = () => {
 }
 
 SignupPage.redirectAuthenticatedTo = "/"
-SignupPage.getLayout = (page) => <Layout title="Sign Up">{page}</Layout>
+SignupPage.getLayout = (page) => <AuthLayout title="Registrase">{page}</AuthLayout>
 
 export default SignupPage

@@ -4,25 +4,27 @@ import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/core/components/Form"
 import { ForgotPassword } from "app/auth/validations"
 import forgotPassword from "app/auth/mutations/forgotPassword"
+import AuthLayout from "../layouts/AuthLayout"
+import { Text } from "@chakra-ui/layout"
 
 const ForgotPasswordPage: BlitzPage = () => {
   const [forgotPasswordMutation, { isSuccess }] = useMutation(forgotPassword)
 
   return (
     <div>
-      <h1>Forgot your password?</h1>
-
       {isSuccess ? (
         <div>
-          <h2>Request Submitted</h2>
-          <p>
-            If your email is in our system, you will receive instructions to reset your password
-            shortly.
-          </p>
+          <Text fontSize="lg" fontWeight="500">
+            Petición enviada
+          </Text>
+          <Text color="gray.500" fontSize="sm">
+            Si tenemos tu correo en nuestro sistema, te enviaremos las instrucciones para cambiar la
+            contraseña.
+          </Text>
         </div>
       ) : (
         <Form
-          submitText="Send Reset Password Instructions"
+          submitText="Envíar instrucciones de cambio"
           schema={ForgotPassword}
           initialValues={{ email: "" }}
           onSubmit={async (values) => {
@@ -43,6 +45,8 @@ const ForgotPasswordPage: BlitzPage = () => {
 }
 
 ForgotPasswordPage.redirectAuthenticatedTo = "/"
-ForgotPasswordPage.getLayout = (page) => <Layout title="Forgot Your Password?">{page}</Layout>
+ForgotPasswordPage.getLayout = (page) => (
+  <AuthLayout title="Olvidé mi contraseña">{page}</AuthLayout>
+)
 
 export default ForgotPasswordPage

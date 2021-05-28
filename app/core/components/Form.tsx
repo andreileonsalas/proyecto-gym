@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/button"
 import { ReactNode, PropsWithoutRef } from "react"
 import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
 import * as z from "zod"
@@ -46,9 +47,26 @@ export function Form<S extends z.ZodType<any, any>>({
           )}
 
           {submitText && (
-            <button type="submit" disabled={submitting}>
+            <Button
+              paddingX="4"
+              paddingY="2"
+              color="white"
+              mt="1rem"
+              fontWeight="semibold"
+              borderRadius="md"
+              w="full"
+              type="submit"
+              isLoading={submitting}
+              loadingText="Cargando"
+              transition="all"
+              // backgroundColor="#0c213a"
+              bgGradient="linear(to-r, yellow.500, orange.500)"
+              _hover={{
+                opacity: 0.8,
+              }}
+            >
               {submitText}
-            </button>
+            </Button>
           )}
 
           <style global jsx>{`
