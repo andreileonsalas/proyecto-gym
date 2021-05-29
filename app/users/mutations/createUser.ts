@@ -2,7 +2,7 @@ import { resolver } from "blitz"
 import db from "db"
 import * as z from "zod"
 
-const CreateUser = z
+export const CreateUser = z
   .object({
     name: z.string().min(2, "Ingrese mínimo 2 caracteres."),
     email: z.string().min(2, "Ingrese mínimo 2 caracteres."),

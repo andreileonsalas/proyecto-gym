@@ -1,12 +1,13 @@
-import { Suspense, useState } from "react"
+import { Suspense } from "react"
 import { Head, Link, usePaginatedQuery, useRouter, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getUsers from "app/users/queries/getUsers"
-import { Box } from "@chakra-ui/layout"
+import { Box, Text } from "@chakra-ui/layout"
 import { Button } from "@chakra-ui/button"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import { Stat, StatHelpText, StatLabel, StatNumber } from "@chakra-ui/stat"
 import { Select } from "@chakra-ui/select"
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs"
 
 const ITEMS_PER_PAGE = 100
 
@@ -30,6 +31,7 @@ export const UsersList = ({ role }: { role: string }) => {
   return (
     <div>
       <Box display="flex" mt="4" listStyleType="none">
+        {users.length === 0 && <Text>No hay miembros con el role de {role}</Text>}
         {users.map((user) => (
           <li key={user.id}>
             <Link href={Routes.ShowUserPage({ userId: user.id })}>
@@ -68,7 +70,6 @@ export const UsersList = ({ role }: { role: string }) => {
 
 const UsersPage: BlitzPage = () => {
   const user = useCurrentUser()
-  const [filter, setFilter] = useState("")
   return (
     <>
       <Head>
@@ -84,15 +85,28 @@ const UsersPage: BlitzPage = () => {
               </Button>
             </Link>
           )}
-          <Select placeholder="Filtrar por..." onChange={(e) => setFilter(e.target.value)}>
-            <option value="ADMIN">Administradores</option>
-            <option value="INSTRUCTOR">Instructores</option>
-            <option value="CLIENT">Clientes</option>
-          </Select>
         </Box>
 
-        <Suspense fallback={<div>Loading...</div>}>
-          <UsersList role={filter} />
+        <Suspense fallback={<div>Cargando...</div>}>
+          <Tabs>
+            <TabList>
+              <Tab>Administradores</Tab>
+              <Tab>Instructores</Tab>
+              <Tab>Clientes</Tab>
+            </TabList>
+
+            <TabPanels>
+              <TabPanel>
+                <UsersList role="ADMIN" />
+              </TabPanel>
+              <TabPanel>
+                <UsersList role="INSTRUCTOR" />
+              </TabPanel>
+              <TabPanel>
+                <UsersList role="CLIENT" />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </Suspense>
       </div>
     </>
