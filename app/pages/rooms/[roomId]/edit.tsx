@@ -2,7 +2,7 @@ import { Suspense } from "react"
 import { Head, Link, useRouter, useQuery, useMutation, useParam, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getRoom from "app/rooms/queries/getRoom"
-import updateRoom from "app/rooms/mutations/updateRoom"
+import updateRoom, { UpdateRoom } from "app/rooms/mutations/updateRoom"
 import { RoomForm, FORM_ERROR } from "app/rooms/components/RoomForm"
 import { Box, Center, Text } from "@chakra-ui/layout"
 
@@ -30,15 +30,11 @@ export const EditRoom = () => {
 
             <RoomForm
               submitText="Actualizar sala"
-              // TODO use a zod schema for form validation
-              //  - Tip: extract mutation's schema into a shared `validations.ts` file and
-              //         then import and use it here
-              // schema={UpdateRoom}
-              initialValues={room}
+              schema={UpdateRoom}
+              initialValues={{ ...room, adminId: room.adminId.toString() }}
               onSubmit={async (values) => {
                 try {
                   const updated = await updateRoomMutation({
-                    id: room.id,
                     ...values,
                   })
                   await setQueryData(updated)

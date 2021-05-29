@@ -52,7 +52,9 @@ export const LabeledSelectField = forwardRef<HTMLSelectElement, LabeledSelectFie
           borderColor={hasError ? "red.500" : "gray.200"}
         >
           {options.map((x) => (
-            <option value={x.value}>{x.label}</option>
+            <option key={x.value} value={x.value}>
+              {x.label}
+            </option>
           ))}
         </Select>
       </FormControl>

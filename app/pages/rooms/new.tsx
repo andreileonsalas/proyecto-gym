@@ -1,6 +1,6 @@
 import { Link, useRouter, useMutation, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
-import createRoom from "app/rooms/mutations/createRoom"
+import createRoom, { CreateRoom } from "app/rooms/mutations/createRoom"
 import { RoomForm, FORM_ERROR } from "app/rooms/components/RoomForm"
 import { Box, Center, Divider, Text } from "@chakra-ui/layout"
 
@@ -17,11 +17,8 @@ const NewRoomPage: BlitzPage = () => {
 
         <RoomForm
           submitText="Crear sala"
-          // TODO use a zod schema for form validation
-          //  - Tip: extract mutation's schema into a shared `validations.ts` file and
-          //         then import and use it here
-          // schema={CreateRoom}
-          // initialValues={{}}
+          schema={CreateRoom}
+          initialValues={{ name: "" }}
           onSubmit={async (values) => {
             try {
               const room = await createRoomMutation(values)
