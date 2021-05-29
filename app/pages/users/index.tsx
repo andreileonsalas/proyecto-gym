@@ -1,4 +1,4 @@
-import { Suspense } from "react"
+import { Suspense, useState } from "react"
 import { Head, Link, usePaginatedQuery, useRouter, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getUsers from "app/users/queries/getUsers"
@@ -6,13 +6,19 @@ import { Box } from "@chakra-ui/layout"
 import { Button } from "@chakra-ui/button"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import { Stat, StatHelpText, StatLabel, StatNumber } from "@chakra-ui/stat"
+import { Select } from "@chakra-ui/select"
 
 const ITEMS_PER_PAGE = 100
 
-export const UsersList = () => {
+export const UsersList = ({ role }: { role: string }) => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
   const [{ users, hasMore }] = usePaginatedQuery(getUsers, {
+    where: {
+      role: {
+        contains: role,
+      },
+    },
     orderBy: { id: "asc" },
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
@@ -62,6 +68,7 @@ export const UsersList = () => {
 
 const UsersPage: BlitzPage = () => {
   const user = useCurrentUser()
+  const [filter, setFilter] = useState("")
   return (
     <>
       <Head>
@@ -77,10 +84,15 @@ const UsersPage: BlitzPage = () => {
               </Button>
             </Link>
           )}
+          <Select placeholder="Filtrar por..." onChange={(e) => setFilter(e.target.value)}>
+            <option value="ADMIN">Administradores</option>
+            <option value="INSTRUCTOR">Instructores</option>
+            <option value="CLIENT">Clientes</option>
+          </Select>
         </Box>
 
         <Suspense fallback={<div>Loading...</div>}>
-          <UsersList />
+          <UsersList role={filter} />
         </Suspense>
       </div>
     </>
