@@ -23,12 +23,31 @@ export const Room = () => {
               <Box bg="tomato" w="100%" p={4} color="white" justifyContent="center">
                 <Text fontSize="4xl">{room.name}</Text>
               </Box>
-              <Text fontSize="2xl">Aforo: {room.maxCapacityAllowed}</Text>
-              <Text fontSize="2xl">Capacidad máxima :{room.maxCapacity}</Text>
-              <Text fontSize="2xl">Administrador :{room.adminId}</Text>
+
+              <Text as="abbr" fontSize="25px">
+                Aforo:
+              </Text>
+              <Text as="samp" fontSize="20px" color="gray.500">
+                {room.maxCapacityAllowed}
+              </Text>
+              <br />
+              <Text as="abbr" fontSize="25px">
+                Capacidad máxima:
+              </Text>
+              <Text as="samp" fontSize="20px" color="gray.500">
+                {room.maxCapacity}
+              </Text>
+              <br />
+              <Text as="abbr" fontSize="25px">
+                Administrador:
+              </Text>
+              <Text as="samp" fontSize="20px" color="gray.500">
+                {room.adminId}
+              </Text>
+              <br />
             </Stat>
 
-            <Button colorScheme="blue" fontSize="2xl">
+            <Button colorScheme="blue" fontSize="1xl">
               <Link href={Routes.EditRoomPage({ roomId: room.id })}>
                 <a>Editar</a>
               </Link>
@@ -36,6 +55,7 @@ export const Room = () => {
             <Button
               colorScheme="red"
               type="button"
+              fontSize="1xl"
               onClick={async () => {
                 if (window.confirm("This will be deleted")) {
                   await deleteRoomMutation({ id: room.id })
