@@ -6,19 +6,17 @@ import { Box, Text } from "@chakra-ui/layout"
 import { Button } from "@chakra-ui/button"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import { Stat, StatHelpText, StatLabel, StatNumber } from "@chakra-ui/stat"
-import { Select } from "@chakra-ui/select"
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs"
+import { Role } from "db"
 
 const ITEMS_PER_PAGE = 100
 
-export const UsersList = ({ role }: { role: string }) => {
+export const UsersList = ({ role }: { role: Role }) => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
   const [{ users, hasMore }] = usePaginatedQuery(getUsers, {
     where: {
-      role: {
-        contains: role,
-      },
+      role: role,
     },
     orderBy: { id: "asc" },
     skip: ITEMS_PER_PAGE * page,
