@@ -18,16 +18,17 @@ export const Room = () => {
     <>
       <div>
         <Center h="100vh">
-          <Box m="4" boxShadow="lg" borderWidth="1px" borderColor="gray.200" p="4" width="16rem">
+          <Box w="24rem" borderWidth="1px" borderColor="gray.200" p="4">
             <Stat>
-              <Center bg="white" h="50px" color="black">
-                <StatNumber>{room.name}</StatNumber>
-              </Center>
-              <StatHelpText>Aforo: {room.maxCapacityAllowed}</StatHelpText>
-              <StatHelpText>Capacidad máxima {room.maxCapacity}</StatHelpText>
+              <Box bg="tomato" w="100%" p={4} color="white" justifyContent="center">
+                <Text fontSize="4xl">{room.name}</Text>
+              </Box>
+              <Text fontSize="2xl">Aforo: {room.maxCapacityAllowed}</Text>
+              <Text fontSize="2xl">Capacidad máxima :{room.maxCapacity}</Text>
+              <Text fontSize="2xl">Administrador :{room.adminId}</Text>
             </Stat>
 
-            <Button colorScheme="blue">
+            <Button colorScheme="blue" fontSize="2xl">
               <Link href={Routes.EditRoomPage({ roomId: room.id })}>
                 <a>Editar</a>
               </Link>
