@@ -3,7 +3,11 @@ import { Head, Link, useRouter, useQuery, useParam, BlitzPage, useMutation, Rout
 import Layout from "app/core/layouts/Layout"
 import getRoom from "app/rooms/queries/getRoom"
 import deleteRoom from "app/rooms/mutations/deleteRoom"
-
+import { Text } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react"
+import { Button, ButtonGroup } from "@chakra-ui/react"
+import { Center, Square, Circle } from "@chakra-ui/react"
+import { Stat, StatHelpText, StatLabel, StatNumber } from "@chakra-ui/stat"
 export const Room = () => {
   const router = useRouter()
   const roomId = useParam("roomId", "number")
@@ -12,30 +16,37 @@ export const Room = () => {
 
   return (
     <>
-      <Head>
-        <title>Room {room.id}</title>
-      </Head>
-
       <div>
-        <h1>Room {room.id}</h1>
-        <pre>{JSON.stringify(room, null, 2)}</pre>
+        <Center h="100vh">
+          <Box m="4" boxShadow="lg" borderWidth="1px" borderColor="gray.200" p="4" width="16rem">
+            <Stat>
+              <Center bg="white" h="50px" color="black">
+                <StatNumber>{room.name}</StatNumber>
+              </Center>
+              <StatHelpText>Aforo: {room.maxCapacityAllowed}</StatHelpText>
+              <StatHelpText>Capacidad máxima {room.maxCapacity}</StatHelpText>
+            </Stat>
 
-        <Link href={Routes.EditRoomPage({ roomId: room.id })}>
-          <a>Edit</a>
-        </Link>
-
-        <button
-          type="button"
-          onClick={async () => {
-            if (window.confirm("This will be deleted")) {
-              await deleteRoomMutation({ id: room.id })
-              router.push(Routes.RoomsPage())
-            }
-          }}
-          style={{ marginLeft: "0.5rem" }}
-        >
-          Delete
-        </button>
+            <Button colorScheme="blue">
+              <Link href={Routes.EditRoomPage({ roomId: room.id })}>
+                <a>Editar</a>
+              </Link>
+            </Button>
+            <Button
+              colorScheme="red"
+              type="button"
+              onClick={async () => {
+                if (window.confirm("This will be deleted")) {
+                  await deleteRoomMutation({ id: room.id })
+                  router.push(Routes.RoomsPage())
+                }
+              }}
+              style={{ marginLeft: "0.5rem" }}
+            >
+              Eliminar
+            </Button>
+          </Box>
+        </Center>
       </div>
     </>
   )

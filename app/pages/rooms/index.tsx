@@ -5,7 +5,9 @@ import getRooms from "app/rooms/queries/getRooms"
 import { Stat, StatHelpText, StatLabel, StatNumber } from "@chakra-ui/stat"
 import { Box } from "@chakra-ui/layout"
 import { Button } from "@chakra-ui/button"
-
+import { Center, Square, Circle } from "@chakra-ui/react"
+import { IconButton } from "@chakra-ui/react"
+import { Text } from "@chakra-ui/react"
 const ITEMS_PER_PAGE = 100
 
 export const RoomsList = () => {
@@ -22,7 +24,10 @@ export const RoomsList = () => {
 
   return (
     <div>
-      <Box display="flex" mt="4" listStyleType="none">
+      <Box bg="tomato" w="100%" p={4} color="white" justifyContent="center">
+        <Text fontSize="4xl">Salas Gym TEC </Text>
+      </Box>
+      <Box display="flex" mt="4" w="100%" listStyleType="none">
         {rooms.map((room) => (
           <li key={room.id}>
             <Link href={Routes.ShowRoomPage({ roomId: room.id })}>
@@ -36,11 +41,11 @@ export const RoomsList = () => {
                   width="16rem"
                 >
                   <Stat>
-                    <StatLabel>{room.id}</StatLabel>
-                    <StatNumber>{room.name}</StatNumber>
-                    <StatHelpText>
-                      {room.maxCapacityAllowed} / {room.maxCapacity}
-                    </StatHelpText>
+                    <Center bg="white" h="50px" color="black">
+                      <StatNumber>{room.name}</StatNumber>
+                    </Center>
+                    <StatHelpText>Aforo: {room.maxCapacityAllowed}</StatHelpText>
+                    <StatHelpText>Capacidad máxima {room.maxCapacity}</StatHelpText>
                   </Stat>
                 </Box>
               </a>
@@ -50,12 +55,12 @@ export const RoomsList = () => {
       </Box>
 
       <Box display="flex" justifyContent="center" mt="5">
-        <Button disabled={page === 0} onClick={goToPreviousPage} mr="1rem">
+        <Button onClick={goToPreviousPage} mr="1rem">
           Anterior
         </Button>
-        <Button disabled={!hasMore} onClick={goToNextPage}>
-          Siguiente
-        </Button>
+        <Link href={Routes.NewRoomPage()}>
+          <Button mr="1rem">Crear sala</Button>
+        </Link>
       </Box>
     </div>
   )
@@ -69,14 +74,6 @@ const RoomsPage: BlitzPage = () => {
       </Head>
 
       <div>
-        <Box p="4">
-          <Link href={Routes.NewRoomPage()}>
-            <Button w="100%" colorScheme="orange">
-              Crear sala
-            </Button>
-          </Link>
-        </Box>
-
         <Suspense fallback={<div>Loading...</div>}>
           <RoomsList />
         </Suspense>
