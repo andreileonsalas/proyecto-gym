@@ -18,27 +18,27 @@ export const Room = () => {
     <>
       <div>
         <Center h="100vh">
-          <Box w="24rem" borderWidth="1px" borderColor="gray.200" p="4">
+          <Box w="24rem" borderWidth="1px" borderColor="gray.150" p="4">
             <Stat>
-              <Box bg="tomato" w="100%" p={4} color="white" justifyContent="center">
+              <Box bg="yellow.500" w="100%" p={4} color="white" justifyContent="center">
                 <Text fontSize="4xl">{room.name}</Text>
               </Box>
 
-              <Text as="abbr" fontSize="25px">
+              <Text as="abbr" fontSize="18px">
                 Aforo:
               </Text>
               <Text as="samp" fontSize="20px" color="gray.500">
                 {room.maxCapacityAllowed}
               </Text>
               <br />
-              <Text as="abbr" fontSize="25px">
+              <Text as="abbr" fontSize="18px">
                 Capacidad máxima:
               </Text>
               <Text as="samp" fontSize="20px" color="gray.500">
                 {room.maxCapacity}
               </Text>
               <br />
-              <Text as="abbr" fontSize="25px">
+              <Text as="abbr" fontSize="18px">
                 Administrador:
               </Text>
               <Text as="samp" fontSize="20px" color="gray.500">
@@ -52,6 +52,7 @@ export const Room = () => {
                 <a>Editar</a>
               </Link>
             </Button>
+
             <Button
               colorScheme="red"
               type="button"
