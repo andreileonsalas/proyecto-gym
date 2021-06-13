@@ -7,6 +7,7 @@ import deleteUser from "app/users/mutations/deleteUser"
 export const User = () => {
   const router = useRouter()
   const userId = useParam("userId", "number")
+  const isNew = useParam("new", "number")
   const [deleteUserMutation] = useMutation(deleteUser)
   const [user] = useQuery(getUser, { id: userId })
 
@@ -20,7 +21,7 @@ export const User = () => {
         <h1>User {user.id}</h1>
         <pre>{JSON.stringify(user, null, 2)}</pre>
 
-        <Link href={Routes.EditUserPage({ userId: user.id })}>
+        <Link href={Routes.EditUserPage({ userId: user.id, new: true })}>
           <a>Edit</a>
         </Link>
 
