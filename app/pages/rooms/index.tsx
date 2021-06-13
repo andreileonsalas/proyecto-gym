@@ -24,7 +24,7 @@ export const RoomsList = () => {
 
   return (
     <div>
-      <Box bg="tomato" w="100%" p={4} color="white" justifyContent="center">
+      <Box bg="yellow.500" w="100%" p={4} color="white" justifyContent="center">
         <Text fontSize="4xl">Salas Gym TEC </Text>
       </Box>
       <Box display="flex" mt="4" w="100%" listStyleType="none">
