@@ -2,9 +2,16 @@ import { resolver } from "blitz"
 import db from "db"
 import * as z from "zod"
 
-const CreateEnrollment = z
+export const CreateEnrollment = z
   .object({
+    id_card: z.string(),
     name: z.string(),
+    phone: z.string(),
+    mail: z.string(),
+    defaulter: z.boolean(),
+    diseases: z.string(),
+    medications: z.string(),
+    contacts: z.string(),
   })
   .nonstrict()
 

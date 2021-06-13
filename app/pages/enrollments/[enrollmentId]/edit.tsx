@@ -14,11 +14,11 @@ export const EditEnrollment = () => {
   return (
     <>
       <Head>
-        <title>Edit Enrollment {enrollment.id}</title>
+        <title>Editar Matrícula {enrollment.id}</title>
       </Head>
 
       <div>
-        <h1>Edit Enrollment {enrollment.id}</h1>
+        <h1>Editar Matrícula {enrollment.id}</h1>
         <pre>{JSON.stringify(enrollment)}</pre>
 
         <EnrollmentForm

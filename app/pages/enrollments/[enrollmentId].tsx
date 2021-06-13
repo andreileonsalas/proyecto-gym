@@ -3,6 +3,11 @@ import { Head, Link, useRouter, useQuery, useParam, BlitzPage, useMutation, Rout
 import Layout from "app/core/layouts/Layout"
 import getEnrollment from "app/enrollments/queries/getEnrollment"
 import deleteEnrollment from "app/enrollments/mutations/deleteEnrollment"
+import { Box } from "@chakra-ui/layout"
+import { Text } from "@chakra-ui/react"
+import { Center } from "@chakra-ui/react"
+import { Button } from "@chakra-ui/react"
+import { Stat } from "@chakra-ui/stat"
 
 export const Enrollment = () => {
   const router = useRouter()
@@ -17,25 +22,43 @@ export const Enrollment = () => {
       </Head>
 
       <div>
-        <h1>Enrollment {enrollment.id}</h1>
-        <pre>{JSON.stringify(enrollment, null, 2)}</pre>
+        <Center h="100vh">
+          <Box w="24rem" borderWidth="1px" borderColor="gray.200" p="4">
+            <Stat>
+              <Box bg="tomato" w="100%" p={4} color="white" justifyContent="center">
+                <Center>
+                  <Text fontSize="4xl">{enrollment.name}</Text>
+                </Center>
+              </Box>
+              <Text fontSize="2xl">Identificación: {enrollment.id_card}</Text>
+              <Text fontSize="2xl">Correo: {enrollment.mail}</Text>
+              <Text fontSize="2xl">Teléfono: {enrollment.phone}</Text>
+              <Text fontSize="2xl">Enfermedades: {enrollment.diseases}</Text>
+              <Text fontSize="2xl">Medicamentos: {enrollment.medications}</Text>
+              <Text fontSize="2xl">Contactos: {enrollment.contacts}</Text>
+            </Stat>
 
-        <Link href={Routes.EditEnrollmentPage({ enrollmentId: enrollment.id })}>
-          <a>Edit</a>
-        </Link>
-
-        <button
-          type="button"
-          onClick={async () => {
-            if (window.confirm("This will be deleted")) {
-              await deleteEnrollmentMutation({ id: enrollment.id })
-              router.push(Routes.EnrollmentsPage())
-            }
-          }}
-          style={{ marginLeft: "0.5rem" }}
-        >
-          Delete
-        </button>
+            <Button colorScheme="blue" fontSize="2xl">
+              <Link href={Routes.EditEnrollmentPage({ enrollmentId: enrollment.id })}>
+                <a>Editar</a>
+              </Link>
+            </Button>
+            <Button
+              colorScheme="red"
+              type="button"
+              fontSize="2xl"
+              onClick={async () => {
+                if (window.confirm("This will be deleted")) {
+                  await deleteEnrollmentMutation({ id: enrollment.id })
+                  router.push(Routes.EnrollmentsPage())
+                }
+              }}
+              style={{ marginLeft: "0.5rem" }}
+            >
+              Eliminar
+            </Button>
+          </Box>
+        </Center>
       </div>
     </>
   )
@@ -46,7 +69,7 @@ const ShowEnrollmentPage: BlitzPage = () => {
     <div>
       <p>
         <Link href={Routes.EnrollmentsPage()}>
-          <a>Enrollments</a>
+          <a>Volver</a>
         </Link>
       </p>
 
