@@ -90,4 +90,5 @@ model Enrollment {
   diseases    String
   medications String
   contacts    String
+  mont        Float
 }
