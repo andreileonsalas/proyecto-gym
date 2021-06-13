@@ -77,3 +77,17 @@ model Room {
   admin              User     @relation(fields: [adminId], references: [id])
   adminId            Int
 }
+
+model Enrollment {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  id_card     String
+  name        String
+  phone       String
+  mail        String
+  defaulter   Boolean  @default(false)
+  diseases    String
+  medications String
+  contacts    String
+}

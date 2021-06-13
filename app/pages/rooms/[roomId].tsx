@@ -18,23 +18,45 @@ export const Room = () => {
     <>
       <div>
         <Center h="100vh">
-          <Box m="4" boxShadow="lg" borderWidth="1px" borderColor="gray.200" p="4" width="16rem">
+          <Box w="24rem" borderWidth="1px" borderColor="gray.150" p="4">
             <Stat>
-              <Center bg="white" h="50px" color="black">
-                <StatNumber>{room.name}</StatNumber>
-              </Center>
-              <StatHelpText>Aforo: {room.maxCapacityAllowed}</StatHelpText>
-              <StatHelpText>Capacidad máxima {room.maxCapacity}</StatHelpText>
+              <Box bg="yellow.500" w="100%" p={4} color="white" justifyContent="center">
+                <Text fontSize="4xl">{room.name}</Text>
+              </Box>
+
+              <Text as="abbr" fontSize="18px">
+                Aforo:
+              </Text>
+              <Text as="samp" fontSize="20px" color="gray.500">
+                {room.maxCapacityAllowed}
+              </Text>
+              <br />
+              <Text as="abbr" fontSize="18px">
+                Capacidad máxima:
+              </Text>
+              <Text as="samp" fontSize="20px" color="gray.500">
+                {room.maxCapacity}
+              </Text>
+              <br />
+              <Text as="abbr" fontSize="18px">
+                Administrador:
+              </Text>
+              <Text as="samp" fontSize="20px" color="gray.500">
+                {room.adminId}
+              </Text>
+              <br />
             </Stat>
 
-            <Button colorScheme="blue">
+            <Button colorScheme="blue" fontSize="1xl">
               <Link href={Routes.EditRoomPage({ roomId: room.id })}>
                 <a>Editar</a>
               </Link>
             </Button>
+
             <Button
               colorScheme="red"
               type="button"
+              fontSize="1xl"
               onClick={async () => {
                 if (window.confirm("This will be deleted")) {
                   await deleteRoomMutation({ id: room.id })
