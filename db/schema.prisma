@@ -22,9 +22,21 @@ model User {
   hashedPassword String?
   role           Role     @default(CLIENT)
 
-  tokens   Token[]
-  sessions Session[]
-  rooms    Room[]
+  specialities      String[]
+  diseases          String[]
+  medicines         String[]
+  emergencyContacts String[]
+
+  scheduleIds Int[]
+
+  hiredAt  DateTime?
+  finishAt DateTime?
+
+  tokens                 Token[]
+  sessions               Session[]
+  rooms                  Room[]
+  RoomSession            RoomSession[]
+  RoomSessionReservation RoomSessionReservation[]
 }
 
 enum Role {
@@ -44,8 +56,9 @@ model Session {
   publicData         String?
   privateData        String?
 
-  user   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  user                   User?                    @relation(fields: [userId], references: [id])
+  userId                 Int?
+  RoomSessionReservation RoomSessionReservation[]
 }
 
 model Token {
@@ -74,10 +87,67 @@ model Room {
   name               String
   maxCapacity        Int
   maxCapacityAllowed Float
-  admin              User     @relation(fields: [adminId], references: [id])
-  adminId            Int
+  specialities       String[]
+
+  adminId    Int
+  scheduleId Int
+
+  admin       User          @relation(fields: [adminId], references: [id])
+  schedule    Schedule      @relation(fields: [scheduleId], references: [id])
+  RoomSession RoomSession[]
 }
 
+model Schedule {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  opens    DateTime
+  closes   DateTime
+  weekDays String[]
+
+  rooms       Room[]
+  RoomSession RoomSession[]
+}
+
+model RoomSession {
+  id              Int      @id @default(autoincrement())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  specialities    String[]
+  maxParticipants Int
+  price           Float
+
+  roomId       Int
+  instructorId Int
+  scheduleId   Int
+
+  room       Room     @relation(fields: [roomId], references: [id])
+  instructor User     @relation(fields: [instructorId], references: [id])
+  schedule   Schedule @relation(fields: [scheduleId], references: [id])
+}
+
+model RoomSessionReservation {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId      Int
+  sessionId   Int
+  paid        Boolean            @default(false)
+  paymentType SessionPaymentType
+  totalHours  Float
+
+  user    User    @relation(fields: [userId], references: [id])
+  session Session @relation(fields: [sessionId], references: [id])
+}
+
+enum SessionPaymentType {
+  BEFORE_HAND
+  IN_TIME
+}
+
+// TODO: Hay que eliminar esto
 model Enrollment {
   id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
