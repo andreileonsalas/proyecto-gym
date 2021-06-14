@@ -13,12 +13,11 @@ export const CreateRoom = z
 
 export default resolver.pipe(resolver.zod(CreateRoom), resolver.authorize(), async (input) => {
   // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-  const room = await db.room.create({
-    data: {
-      ...input,
-      adminId: +input.adminId,
-    },
-  })
-
-  return room
+  // const room = await db.room.create({
+  //   data: {
+  //     ...input,
+  //     adminId: +input.adminId,
+  //   },
+  // })
+  // return room
 })
