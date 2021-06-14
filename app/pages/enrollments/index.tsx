@@ -35,9 +35,9 @@ export const EnrollmentsList = () => {
         </Button>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Button colorScheme="green" fontSize="1xl">
-          <Link href={Routes.NewMontPage()}>
-            <a>Cambiar Monto</a>
-          </Link>
+          {/* <Link href={Routes.NewMontPage()}> */}
+          <a>Cambiar Monto</a>
+          {/* </Link> */}
         </Button>
       </div>
       <br></br>
