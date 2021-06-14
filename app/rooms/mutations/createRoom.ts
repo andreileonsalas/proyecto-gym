@@ -20,4 +20,7 @@ export default resolver.pipe(resolver.zod(CreateRoom), resolver.authorize(), asy
   //   },
   // })
   // return room
+  return {
+    id: 1,
+  }
 })

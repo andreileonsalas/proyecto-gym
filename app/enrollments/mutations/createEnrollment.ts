@@ -22,5 +22,8 @@ export default resolver.pipe(
     // TODO: in multi-tenant app, you must add validation to ensure correct tenant
     // const enrollment = await db.enrollment.create({ data: input })
     // return enrollment
+    return {
+      id: 1,
+    }
   }
 )
