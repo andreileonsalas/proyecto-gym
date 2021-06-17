@@ -1,12 +1,14 @@
-import { Link, Routes, useMutation } from "blitz"
+import { invalidateQuery, useMutation } from "blitz"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/core/components/Form"
-import signup from "app/auth/mutations/signup"
 import { Signup } from "app/auth/validations"
 import { Box, Text } from "@chakra-ui/layout"
+import getCurrentUser from "app/users/queries/getCurrentUser"
+import signup from "app/auth/mutations/signup"
 
 type SignupFormProps = {
   onSuccess?: () => void
+  onToggle?: () => void
 }
 
 export const SignupForm = (props: SignupFormProps) => {
@@ -22,9 +24,9 @@ export const SignupForm = (props: SignupFormProps) => {
           try {
             await signupMutation(values)
             props.onSuccess?.()
+            await invalidateQuery(getCurrentUser)
           } catch (error) {
             if (error.code === "P2002" && error.meta?.target?.includes("email")) {
-              // This error comes from Prisma
               return { email: "Este email está ocupado." }
             } else {
               return { [FORM_ERROR]: error.toString() }
@@ -32,21 +34,20 @@ export const SignupForm = (props: SignupFormProps) => {
           }
         }}
       >
-        <LabeledTextField name="email" label="Email" placeholder="Email" />
+        <LabeledTextField name="name" label="Nombre" placeholder="Tu nombre" />
+        <LabeledTextField name="email" label="Email" placeholder="alguien@tec.com" />
         <LabeledTextField
           name="password"
-          label="Password"
-          placeholder="Contraseña"
+          label="Contraseña"
+          placeholder="*************"
           type="password"
         />
       </Form>
       <Box mt="1rem" textAlign="center">
         o{" "}
-        <Link href={Routes.LoginPage()}>
-          <Text as="span" cursor="pointer" color="yellow.500">
-            iniciar sesión
-          </Text>
-        </Link>
+        <Text as="span" cursor="pointer" color="blue.500" onClick={props.onToggle}>
+          iniciar sesión
+        </Text>
       </Box>
     </div>
   )

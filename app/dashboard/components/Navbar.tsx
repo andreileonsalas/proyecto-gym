@@ -43,7 +43,7 @@ export const Navbar = () => {
             fontFamily="Poppins"
             ml="2"
           >
-            GimaTec
+            GimnaTec
           </Text>
         </Flex>
         <Flex ml="8" display={["none", "flex"]}>

@@ -25,6 +25,8 @@ export const NavbarButton: FC<Props> = (props) => {
             justifyContent="flex-start"
             variant="ghost"
             backgroundColor={isActive ? "rgba(0, 0, 0, 0.16)" : "none"}
+            _active={{ backgroundColor: "none" }}
+            _hover={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
             color="white"
             size="sm"
             leftIcon={<props.Icon size={20} color="white" />}

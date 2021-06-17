@@ -1,12 +1,14 @@
-import { AuthenticationError, Link, useMutation, Routes } from "blitz"
+import { AuthenticationError, useMutation, invalidateQuery } from "blitz"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/core/components/Form"
 import login from "app/auth/mutations/login"
+import getCurrentUser from "app/users/queries/getCurrentUser"
 import { Login } from "app/auth/validations"
 import { Box, Text } from "@chakra-ui/layout"
 
 type LoginFormProps = {
   onSuccess?: () => void
+  onToggle?: () => void
 }
 
 export const LoginForm = (props: LoginFormProps) => {
@@ -21,6 +23,7 @@ export const LoginForm = (props: LoginFormProps) => {
         onSubmit={async (values) => {
           try {
             await loginMutation(values)
+            await invalidateQuery(getCurrentUser)
             props.onSuccess?.()
           } catch (error) {
             if (error instanceof AuthenticationError) {
@@ -41,20 +44,13 @@ export const LoginForm = (props: LoginFormProps) => {
           placeholder="Contraseña"
           type="password"
         />
-        <Box mt="0rem" fontSize="sm">
-          <Link href={Routes.ForgotPasswordPage()}>
-            <a>Olvide mi contraseña?</a>
-          </Link>
-        </Box>
       </Form>
 
       <Box mt="1rem" textAlign="center">
         o{" "}
-        <Link href={Routes.SignupPage()}>
-          <Text as="span" cursor="pointer" color="yellow.500">
-            registrate
-          </Text>
-        </Link>
+        <Text as="span" cursor="pointer" color="blue.500" onClick={props.onToggle}>
+          registrate
+        </Text>
       </Box>
     </div>
   )

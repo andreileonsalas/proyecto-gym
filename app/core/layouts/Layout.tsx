@@ -11,7 +11,7 @@ export const Layout: FC<Props> = (props) => {
   return (
     <>
       <Head>
-        <title>{props.title || "GimaTec"}</title>
+        <title>{props.title || "GimnaTec"}</title>
         <link rel="icon" href="/img/gym-logo.png" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
