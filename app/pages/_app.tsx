@@ -13,8 +13,6 @@ import { Suspense } from "react"
 
 import { ChakraProvider } from "@chakra-ui/react"
 
-import "../styles.css"
-
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
   const router = useRouter()
