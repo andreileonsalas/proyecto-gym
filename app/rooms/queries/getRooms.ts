@@ -17,7 +17,32 @@ export default resolver.pipe(
       skip,
       take,
       count: () => db.room.count({ where }),
-      query: (paginateArgs) => db.room.findMany({ ...paginateArgs, where, orderBy }),
+      query: (paginateArgs) =>
+        db.room.findMany({
+          ...paginateArgs,
+          where,
+          orderBy,
+          select: {
+            id: true,
+            name: true,
+            specialities: true,
+            admin: {
+              select: {
+                name: true,
+              },
+            },
+            maxCapacity: true,
+            maxCapacityAllowed: true,
+            photo: true,
+            schedule: {
+              select: {
+                closes: true,
+                opens: true,
+                weekDays: true,
+              },
+            },
+          },
+        }),
     })
 
     return {

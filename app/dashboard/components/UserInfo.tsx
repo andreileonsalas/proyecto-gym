@@ -1,15 +1,17 @@
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import { Menu, MenuButton, MenuList, MenuItem, MenuGroup, Avatar } from "@chakra-ui/react"
-import { invalidateQuery, useMutation } from "blitz"
+import { invalidateQuery, Routes, useMutation, useRouter } from "blitz"
 import logout from "app/auth/mutations/logout"
 import { AuthModal } from "app/auth/modals/AuthModal"
 import getCurrentUser from "app/users/queries/getCurrentUser"
 
 export const UserInfo = () => {
   const user = useCurrentUser()
+  const router = useRouter()
   const [logoutMutation] = useMutation(logout, {
     onMutate: async () => {
       await invalidateQuery(getCurrentUser)
+      router.replace(Routes.Home())
     },
   })
 

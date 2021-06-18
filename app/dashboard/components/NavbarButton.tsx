@@ -2,17 +2,22 @@ import { Link, useRouter } from "blitz"
 import { FC } from "react"
 import { IconType } from "react-icons/lib"
 import { Button } from "@chakra-ui/react"
+import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 
 type Props = {
   href?: any
   Icon: IconType
   text: string
+  authenticated?: boolean
 }
 
 export const NavbarButton: FC<Props> = (props) => {
   const router = useRouter()
+  const user = useCurrentUser()
 
   const isActive = router.pathname.includes(props.href?.pathname)
+
+  if (props.authenticated && !user) return null
 
   if (props.href)
     return (

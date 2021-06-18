@@ -66,7 +66,7 @@ export const Navbar = () => {
 const NavItems = () => (
   <>
     <NavbarButton text="Inicio" Icon={RiDashboardLine} href={Routes.Home()} />
-    <NavbarButton text="Salas" Icon={GiCubes} href={Routes.RoomsPage()} />
+    <NavbarButton text="Salas" Icon={GiCubes} href={Routes.RoomsPage()} authenticated={true} />
     <NavbarButton text="Sesiones" Icon={BiTimer} href={Routes.RoomsPage()} />
   </>
 )

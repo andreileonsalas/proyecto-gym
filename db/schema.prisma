@@ -87,6 +87,7 @@ model Room {
   name               String
   maxCapacity        Int
   maxCapacityAllowed Float
+  photo              String
   specialities       String[]
 
   adminId    Int
