@@ -1,20 +1,39 @@
 import { Suspense } from "react"
 import { Link, useQuery, useParam, BlitzPage, Routes } from "blitz"
+import { Box, Link as LinkUI } from "@chakra-ui/react"
+import { BsArrowLeft } from "react-icons/bs"
 import Layout from "app/core/layouts/Layout"
 import getRoom from "app/rooms/queries/getRoom"
 import Section from "app/core/sections/Section"
 import RoomEditModal from "app/rooms/modals/RoomEditModal"
-import { Box, Link as LinkUI } from "@chakra-ui/react"
-import { BsArrowLeft } from "react-icons/bs"
+import SectionHero from "app/core/sections/SectionHero"
+import SectionDetails from "app/core/sections/SectionDetails"
+import SessionCreateModal from "app/sessions/modals/SessionCreateModal"
 
 export const Room = () => {
   const roomId = useParam("roomId", "number")
   const [room] = useQuery(getRoom, { id: roomId })
 
   return (
-    <>
-      <Section title={room.name} extraData={<RoomEditModal />}></Section>
-    </>
+    <div>
+      <Section title={room.name} extraData={<RoomEditModal />}>
+        <SectionHero image={room.photo}>
+          <SectionDetails
+            title={`Detalles la sala ${room.name}`}
+            items={[
+              { name: "Abre:", value: room.schedule.opens.toLocaleTimeString() },
+              { name: "Cierra:", value: room.schedule.closes.toLocaleTimeString() },
+              { name: "Abierto los días:", value: room.schedule.weekDays.join(", ") },
+              { name: "Especialidades:", value: room.specialities.join(", ") },
+              { name: "Capacidad total:", value: room.maxCapacity.toString() },
+              { name: "Capacidad permitida:", value: room.maxCapacityAllowed.toString() },
+            ]}
+            footerText={`Esta sala es administrada por ${room.admin.name}`}
+          />
+        </SectionHero>
+      </Section>
+      <Section title={`Sessiones de ${room.name}`} extraData={<SessionCreateModal />}></Section>
+    </div>
   )
 }
 
