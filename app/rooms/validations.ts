@@ -11,3 +11,7 @@ export const RoomCreateValidation = z.object({
   openDays: z.string(),
   specialities: z.string(),
 })
+
+export const RoomEditValidation = RoomCreateValidation.extend({
+  roomId: z.number(),
+})

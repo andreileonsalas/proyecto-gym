@@ -9,7 +9,7 @@ const GetRoom = z.object({
 
 export default resolver.pipe(resolver.zod(GetRoom), resolver.authorize(), async ({ id }, ctx) => {
   // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-  const room = await db.room.findFirst({ where: { id } })
+  const room = await db.room.findFirst({ where: { id }, include: { schedule: true, admin: true } })
 
   if (!room) throw new NotFoundError()
 

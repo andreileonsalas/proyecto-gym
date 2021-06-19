@@ -1,75 +1,19 @@
 import { Suspense } from "react"
-import { Head, Link, useRouter, useQuery, useParam, BlitzPage, useMutation, Routes } from "blitz"
+import { Link, useQuery, useParam, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getRoom from "app/rooms/queries/getRoom"
-import deleteRoom from "app/rooms/mutations/deleteRoom"
-import { Text } from "@chakra-ui/react"
-import { Box } from "@chakra-ui/react"
-import { Button, ButtonGroup } from "@chakra-ui/react"
-import { Center, Square, Circle } from "@chakra-ui/react"
-import { Stat, StatHelpText, StatLabel, StatNumber } from "@chakra-ui/stat"
+import Section from "app/core/sections/Section"
+import RoomEditModal from "app/rooms/modals/RoomEditModal"
+import { Box, Link as LinkUI } from "@chakra-ui/react"
+import { BsArrowLeft } from "react-icons/bs"
+
 export const Room = () => {
-  const router = useRouter()
   const roomId = useParam("roomId", "number")
-  const [deleteRoomMutation] = useMutation(deleteRoom)
   const [room] = useQuery(getRoom, { id: roomId })
 
   return (
     <>
-      <div>
-        <Center h="100vh">
-          <Box w="24rem" borderWidth="1px" borderColor="gray.150" p="4">
-            <Stat>
-              <Box bg="yellow.500" w="100%" p={4} color="white" justifyContent="center">
-                <Text fontSize="4xl">{room.name}</Text>
-              </Box>
-
-              <Text as="abbr" fontSize="18px">
-                Aforo:
-              </Text>
-              <Text as="samp" fontSize="20px" color="gray.500">
-                {room.maxCapacityAllowed}
-              </Text>
-              <br />
-              <Text as="abbr" fontSize="18px">
-                Capacidad máxima:
-              </Text>
-              <Text as="samp" fontSize="20px" color="gray.500">
-                {room.maxCapacity}
-              </Text>
-              <br />
-              <Text as="abbr" fontSize="18px">
-                Administrador:
-              </Text>
-              <Text as="samp" fontSize="20px" color="gray.500">
-                {room.adminId}
-              </Text>
-              <br />
-            </Stat>
-
-            <Button colorScheme="blue" fontSize="1xl">
-              <Link href={Routes.EditRoomPage({ roomId: room.id })}>
-                <a>Editar</a>
-              </Link>
-            </Button>
-
-            <Button
-              colorScheme="red"
-              type="button"
-              fontSize="1xl"
-              onClick={async () => {
-                if (window.confirm("This will be deleted")) {
-                  await deleteRoomMutation({ id: room.id })
-                  router.push(Routes.RoomsPage())
-                }
-              }}
-              style={{ marginLeft: "0.5rem" }}
-            >
-              Eliminar
-            </Button>
-          </Box>
-        </Center>
-      </div>
+      <Section title={room.name} extraData={<RoomEditModal />}></Section>
     </>
   )
 }
@@ -77,11 +21,24 @@ export const Room = () => {
 const ShowRoomPage: BlitzPage = () => {
   return (
     <div>
-      <p>
-        <Link href={Routes.RoomsPage()}>
-          <a>Rooms</a>
-        </Link>
-      </p>
+      <Link href={Routes.RoomsPage()}>
+        <LinkUI
+          transition="all 0.15s ease-out"
+          color="blue.600"
+          fontSize="xl"
+          fontWeight="bold"
+          display="inline-flex"
+          alignItems="flex-end"
+          position="absolute"
+          top="5rem"
+          left="1rem"
+        >
+          <Box as="span" ml="1">
+            <BsArrowLeft size={26} />
+          </Box>{" "}
+          Ver todas las salas
+        </LinkUI>
+      </Link>
 
       <Suspense fallback={<div>Loading...</div>}>
         <Room />
