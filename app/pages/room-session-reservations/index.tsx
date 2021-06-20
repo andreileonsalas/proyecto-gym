@@ -27,7 +27,7 @@ export const RoomSessionReservationsList = () => {
                 roomSessionReservationId: roomSessionReservation.id,
               })}
             >
-              <a>{roomSessionReservation.name}</a>
+              <a>{roomSessionReservation.id}</a>
             </Link>
           </li>
         ))}

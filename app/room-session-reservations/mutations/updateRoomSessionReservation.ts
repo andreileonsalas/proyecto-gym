@@ -4,8 +4,9 @@ import * as z from "zod"
 
 const UpdateRoomSessionReservation = z
   .object({
-    id: z.number(),
-    name: z.string(),
+    sessionId: z.number(),
+    paymentType: z.enum(["BEFORE_HAND", "IN_TIME"]),
+    totalHours: z.number(),
   })
   .nonstrict()
 
@@ -14,7 +15,15 @@ export default resolver.pipe(
   resolver.authorize(),
   async ({ id, ...data }) => {
     // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-    const roomSessionReservation = await db.roomSessionReservation.update({ where: { id }, data })
+    const roomSessionReservation = await db.roomSessionReservation.update({
+      where: { id },
+      data: {
+        paymentType: input.paymentType,
+        totalHours: input.totalHours,
+        sessionId: input.sessionId,
+        userId: userId,
+      },
+    })
 
     return roomSessionReservation
   }
