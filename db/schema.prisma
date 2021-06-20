@@ -32,11 +32,11 @@ model User {
   hiredAt  DateTime?
   finishAt DateTime?
 
-  tokens                 Token[]
-  sessions               Session[]
-  rooms                  Room[]
-  RoomSession            RoomSession[]
-  RoomSessionReservation RoomSessionReservation[]
+  tokens             Token[]
+  sessions           RoomSession[]
+  rooms              Room[]
+  sessionReservation RoomSessionReservation[]
+  Session            Session[]
 }
 
 enum Role {
@@ -56,9 +56,8 @@ model Session {
   publicData         String?
   privateData        String?
 
-  user                   User?                    @relation(fields: [userId], references: [id])
-  userId                 Int?
-  RoomSessionReservation RoomSessionReservation[]
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?
 }
 
 model Token {
@@ -123,9 +122,10 @@ model RoomSession {
   instructorId Int
   scheduleId   Int
 
-  room       Room     @relation(fields: [roomId], references: [id])
-  instructor User     @relation(fields: [instructorId], references: [id])
-  schedule   Schedule @relation(fields: [scheduleId], references: [id])
+  room                   Room                     @relation(fields: [roomId], references: [id])
+  instructor             User                     @relation(fields: [instructorId], references: [id])
+  schedule               Schedule                 @relation(fields: [scheduleId], references: [id])
+  RoomSessionReservation RoomSessionReservation[]
 }
 
 model RoomSessionReservation {
@@ -139,27 +139,11 @@ model RoomSessionReservation {
   paymentType SessionPaymentType
   totalHours  Float
 
-  user    User    @relation(fields: [userId], references: [id])
-  session Session @relation(fields: [sessionId], references: [id])
+  user    User        @relation(fields: [userId], references: [id])
+  session RoomSession @relation(fields: [sessionId], references: [id])
 }
 
 enum SessionPaymentType {
   BEFORE_HAND
   IN_TIME
-}
-
-// TODO: Hay que eliminar esto
-model Enrollment {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  id_card     String
-  name        String
-  phone       String
-  mail        String
-  defaulter   Boolean  @default(false)
-  diseases    String
-  medications String
-  contacts    String
-  mont        Float
 }
