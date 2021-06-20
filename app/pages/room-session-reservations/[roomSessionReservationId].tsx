@@ -28,15 +28,15 @@ export const RoomSessionReservation = () => {
         <div>
           {/** Preguntar como agregar schedule en el query. */}
           <Section title={roomSessionReservation.id}>
-            <SectionHero image={roomSessionReservation.id}>
+            <SectionHero image={roomSessionReservation.id.toString()}>
               <SectionDetails
-                title={`Detalles la sala ${roomSessionReservation.id}`}
+                title={`Detalles la sala ${roomSessionReservation.id.toString()}`}
                 items={[
-                  { name: "Precio:", value: roomSessionReservation.id },
-                  { name: "Capacidad:", value: roomSessionReservation.id },
-                  { name: "Abre:", value: roomSessionReservation.id },
+                  { name: "Precio:", value: roomSessionReservation.id.toString() },
+                  { name: "Capacidad:", value: roomSessionReservation.id.toString() },
+                  { name: "Abre:", value: roomSessionReservation.id.toString() },
                 ]}
-                footerText={`Esta sala es administrada por ${roomSessionReservation.id}`}
+                footerText={`Esta sala es administrada por ${roomSessionReservation.id.toString()}`}
               />
             </SectionHero>
           </Section>
