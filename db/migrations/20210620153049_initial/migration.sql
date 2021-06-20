@@ -65,6 +65,7 @@ CREATE TABLE "Room" (
     "name" TEXT NOT NULL,
     "maxCapacity" INTEGER NOT NULL,
     "maxCapacityAllowed" DOUBLE PRECISION NOT NULL,
+    "photo" TEXT NOT NULL,
     "specialities" TEXT[],
     "adminId" INTEGER NOT NULL,
     "scheduleId" INTEGER NOT NULL,
@@ -113,24 +114,6 @@ CREATE TABLE "RoomSessionReservation" (
     PRIMARY KEY ("id")
 );
 
--- CreateTable
-CREATE TABLE "Enrollment" (
-    "id" SERIAL NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "id_card" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
-    "mail" TEXT NOT NULL,
-    "defaulter" BOOLEAN NOT NULL DEFAULT false,
-    "diseases" TEXT NOT NULL,
-    "medications" TEXT NOT NULL,
-    "contacts" TEXT NOT NULL,
-    "mont" DOUBLE PRECISION NOT NULL,
-
-    PRIMARY KEY ("id")
-);
-
 -- CreateIndex
 CREATE UNIQUE INDEX "User.email_unique" ON "User"("email");
 
@@ -165,4 +148,4 @@ ALTER TABLE "RoomSession" ADD FOREIGN KEY ("scheduleId") REFERENCES "Schedule"("
 ALTER TABLE "RoomSessionReservation" ADD FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "RoomSessionReservation" ADD FOREIGN KEY ("sessionId") REFERENCES "Session"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "RoomSessionReservation" ADD FOREIGN KEY ("sessionId") REFERENCES "RoomSession"("id") ON DELETE CASCADE ON UPDATE CASCADE;
