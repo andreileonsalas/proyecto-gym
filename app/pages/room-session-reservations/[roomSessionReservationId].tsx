@@ -3,6 +3,10 @@ import { Head, Link, useRouter, useQuery, useParam, BlitzPage, useMutation, Rout
 import Layout from "app/core/layouts/Layout"
 import getRoomSessionReservation from "app/room-session-reservations/queries/getRoomSessionReservation"
 import deleteRoomSessionReservation from "app/room-session-reservations/mutations/deleteRoomSessionReservation"
+import Section from "app/core/sections/Section"
+import SectionHero from "app/core/sections/SectionHero"
+import SectionDetails from "app/core/sections/SectionDetails"
+import SessionCreateModal from "app/sessions/modals/SessionCreateModal"
 
 export const RoomSessionReservation = () => {
   const router = useRouter()
@@ -21,6 +25,22 @@ export const RoomSessionReservation = () => {
       <div>
         <h1>RoomSessionReservation {roomSessionReservation.id}</h1>
         <pre>{JSON.stringify(roomSessionReservation, null, 2)}</pre>
+        <div>
+          {/** Preguntar como agregar schedule en el query. */}
+          <Section title={roomSessionReservation.id}>
+            <SectionHero image={roomSessionReservation.id}>
+              <SectionDetails
+                title={`Detalles la sala ${roomSessionReservation.id}`}
+                items={[
+                  { name: "Precio:", value: roomSessionReservation.id },
+                  { name: "Capacidad:", value: roomSessionReservation.id },
+                  { name: "Abre:", value: roomSessionReservation.id },
+                ]}
+                footerText={`Esta sala es administrada por ${roomSessionReservation.id}`}
+              />
+            </SectionHero>
+          </Section>
+        </div>
 
         <Link
           href={Routes.EditRoomSessionReservationPage({

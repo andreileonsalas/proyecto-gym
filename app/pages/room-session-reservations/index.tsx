@@ -2,44 +2,43 @@ import { Suspense } from "react"
 import { Head, Link, usePaginatedQuery, useRouter, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getRoomSessionReservations from "app/room-session-reservations/queries/getRoomSessionReservations"
-
-const ITEMS_PER_PAGE = 100
+import SectionCard from "app/core/sections/SectionCard"
+import { Box } from "@chakra-ui/layout"
+import Section from "app/core/sections/Section"
 
 export const RoomSessionReservationsList = () => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
-  const [{ roomSessionReservations, hasMore }] = usePaginatedQuery(getRoomSessionReservations, {
+  const [{ roomSessionReservations }] = usePaginatedQuery(getRoomSessionReservations, {
     orderBy: { id: "asc" },
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
   })
 
-  const goToPreviousPage = () => router.push({ query: { page: page - 1 } })
-  const goToNextPage = () => router.push({ query: { page: page + 1 } })
-
   return (
-    <div>
-      <ul>
-        {roomSessionReservations.map((roomSessionReservation) => (
-          <li key={roomSessionReservation.id}>
+    <Section title="Sesiones">
+      <Box display="flex" mt="4" w="100%" listStyleType="none">
+        {roomSessionReservations.map((roomSessionReservations) => (
+          <li key={roomSessionReservations.id}>
             <Link
               href={Routes.ShowRoomSessionReservationPage({
-                roomSessionReservationId: roomSessionReservation.id,
+                roomSessionReservationId: roomSessionReservations.id,
               })}
             >
-              <a>{roomSessionReservation.id}</a>
+              <a>
+                <SectionCard
+                  photo={"http://localhost:3000/img/gym-logo.png"}
+                  tag={roomSessionReservations.totalHours}
+                  title={`Sala: ${roomSessionReservations.id}`}
+                  description={`El precio de la reservacion s ${roomSessionReservations.totalHours} la cual el estado con respecto al pago es de:  ${roomSessionReservations.paid}. Y el tipo de pago es  ${roomSessionReservations.paymentType}`}
+                  duration={`${roomSessionReservations.totalHours}`}
+                />
+              </a>
             </Link>
           </li>
         ))}
-      </ul>
-
-      <button disabled={page === 0} onClick={goToPreviousPage}>
-        Previous
-      </button>
-      <button disabled={!hasMore} onClick={goToNextPage}>
-        Next
-      </button>
-    </div>
+      </Box>
+    </Section>
   )
 }
 

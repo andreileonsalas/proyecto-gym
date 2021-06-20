@@ -21,7 +21,7 @@ export const RoomSessionsList = () => {
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
   console.log(roomSessions)
   return (
-    <Section title="Salas">
+    <Section title="Sesiones">
       <Box display="flex" mt="4" w="100%" listStyleType="none">
         {roomSessions.map((roomSession) => (
           <li key={roomSession.id}>

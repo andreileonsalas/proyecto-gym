@@ -68,6 +68,7 @@ const NavItems = () => (
     <NavbarButton text="Inicio" Icon={RiDashboardLine} href={Routes.Home()} />
     <NavbarButton text="Salas" Icon={GiCubes} href={Routes.RoomsPage()} authenticated={true} />
     <NavbarButton text="Sesiones" Icon={BiTimer} href={Routes.RoomSessionsPage()} />
+    <NavbarButton text="Reservaciones" Icon={BiTimer} href={Routes.RoomSessionReservationsPage()} />
   </>
 )
 

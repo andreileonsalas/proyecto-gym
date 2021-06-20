@@ -12,7 +12,10 @@ export default resolver.pipe(
   resolver.authorize(),
   async ({ id }) => {
     // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-    const roomSessionReservation = await db.roomSessionReservation.findFirst({ where: { id } })
+    const roomSessionReservation = await db.roomSessionReservation.findFirst({
+      where: { id },
+      include: { session: true },
+    })
 
     if (!roomSessionReservation) throw new NotFoundError()
 

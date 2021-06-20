@@ -3,6 +3,10 @@ import { Head, Link, useRouter, useQuery, useParam, BlitzPage, useMutation, Rout
 import Layout from "app/core/layouts/Layout"
 import getRoomSession from "app/room-sessions/queries/getRoomSession"
 import deleteRoomSession from "app/room-sessions/mutations/deleteRoomSession"
+import Section from "app/core/sections/Section"
+import SectionHero from "app/core/sections/SectionHero"
+import SectionDetails from "app/core/sections/SectionDetails"
+import SessionCreateModal from "app/sessions/modals/SessionCreateModal"
 
 export const RoomSession = () => {
   const router = useRouter()
@@ -19,6 +23,22 @@ export const RoomSession = () => {
       <div>
         <h1>RoomSession {roomSession.id}</h1>
         <pre>{JSON.stringify(roomSession, null, 2)}</pre>
+        <div>
+          {/** Preguntar como agregar schedule en el query. */}
+          <Section title={roomSession.room.name}>
+            <SectionHero image={roomSession.room.photo}>
+              <SectionDetails
+                title={`Detalles la sala ${roomSession.room.name}`}
+                items={[
+                  { name: "Precio:", value: roomSession.price },
+                  { name: "Capacidad:", value: roomSession.maxParticipants },
+                  { name: "Abre:", value: roomSession.room.name },
+                ]}
+                footerText={`Esta sala es administrada por ${roomSession.instructor.name}`}
+              />
+            </SectionHero>
+          </Section>
+        </div>
 
         <Link href={Routes.EditRoomSessionPage({ roomSessionId: roomSession.id })}>
           <a>Edit</a>
