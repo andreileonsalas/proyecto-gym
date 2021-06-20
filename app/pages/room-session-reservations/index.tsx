@@ -33,7 +33,7 @@ export const RoomSessionReservationsList = () => {
               <a>
                 <SectionCard
                   photo={"http://localhost:3000/img/gym-logo.png"}
-                  tag={roomSessionReservations.totalHours}
+                  tag={roomSessionReservations.totalHours.toString()}
                   title={`Sala: ${roomSessionReservations.id}`}
                   description={`El precio de la reservacion s ${roomSessionReservations.totalHours} la cual el estado con respecto al pago es de:  ${roomSessionReservations.paid}. Y el tipo de pago es  ${roomSessionReservations.paymentType}`}
                   duration={`${roomSessionReservations.totalHours}`}

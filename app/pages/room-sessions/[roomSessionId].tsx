@@ -30,8 +30,8 @@ export const RoomSession = () => {
               <SectionDetails
                 title={`Detalles la sala ${roomSession.room.name}`}
                 items={[
-                  { name: "Precio:", value: roomSession.price },
-                  { name: "Capacidad:", value: roomSession.maxParticipants },
+                  { name: "Precio:", value: roomSession.price.toString() },
+                  { name: "Capacidad:", value: roomSession.maxParticipants.toString() },
                   { name: "Abre:", value: roomSession.room.name },
                 ]}
                 footerText={`Esta sala es administrada por ${roomSession.instructor.name}`}

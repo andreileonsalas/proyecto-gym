@@ -27,7 +27,7 @@ export const RoomSessionReservation = () => {
         <pre>{JSON.stringify(roomSessionReservation, null, 2)}</pre>
         <div>
           {/** Preguntar como agregar schedule en el query. */}
-          <Section title={roomSessionReservation.id}>
+          <Section title={roomSessionReservation.id.toString()}>
             <SectionHero image={roomSessionReservation.id.toString()}>
               <SectionDetails
                 title={`Detalles la sala ${roomSessionReservation.id.toString()}`}
