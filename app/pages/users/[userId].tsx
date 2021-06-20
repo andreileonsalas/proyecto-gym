@@ -3,11 +3,10 @@ import { Head, Link, useRouter, useQuery, useParam, BlitzPage, useMutation, Rout
 import Layout from "app/core/layouts/Layout"
 import getUser from "app/users/queries/getUser"
 import deleteUser from "app/users/mutations/deleteUser"
-import { Button, ButtonGroup } from "@chakra-ui/react"
+import { Button } from "@chakra-ui/react"
 export const User = () => {
   const router = useRouter()
   const userId = useParam("userId", "number")
-  const isNew = useParam("new", "number")
   const [deleteUserMutation] = useMutation(deleteUser)
   const [user] = useQuery(getUser, { id: userId })
 
