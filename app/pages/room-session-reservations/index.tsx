@@ -6,14 +6,19 @@ import SectionCard from "app/core/sections/SectionCard"
 import { Box } from "@chakra-ui/layout"
 import Section from "app/core/sections/Section"
 
+const ITEMS_PER_PAGE = 100
+
 export const RoomSessionReservationsList = () => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
-  const [{ roomSessionReservations }] = usePaginatedQuery(getRoomSessionReservations, {
+  const [{ roomSessionReservations, hasMore }] = usePaginatedQuery(getRoomSessionReservations, {
     orderBy: { id: "asc" },
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
   })
+
+  const goToPreviousPage = () => router.push({ query: { page: page - 1 } })
+  const goToNextPage = () => router.push({ query: { page: page + 1 } })
 
   return (
     <Section title="Sesiones">
