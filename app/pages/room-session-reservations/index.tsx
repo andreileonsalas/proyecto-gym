@@ -37,7 +37,7 @@ export const RoomSessionReservationsList = () => {
                   title={`Sala: ${roomSessionReservations.id}`}
                   description={`El precio de la reservacion s ${roomSessionReservations.totalHours} la cual el estado con respecto al pago es de:  ${roomSessionReservations.paid}. Y el tipo de pago es  ${roomSessionReservations.paymentType}`}
                   duration={`${roomSessionReservations.totalHours}`}
-                  tag={roomSessionReservations.totalHours.toString()}
+                  helper={roomSessionReservations.totalHours.toString()}
                 />
               </a>
             </Link>
