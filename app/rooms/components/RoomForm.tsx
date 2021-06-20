@@ -8,6 +8,9 @@ import * as z from "zod"
 export { FORM_ERROR } from "app/core/components/Form"
 
 export default function RoomForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
+  {
+    /* consigue todos los usuarios administradores */
+  }
   const [users] = useQuery(getUsers, {
     where: {
       role: "ADMIN",
@@ -33,6 +36,7 @@ export default function RoomForm<S extends z.ZodType<any, any>>(props: FormProps
         />
       </Flex>
       <LabeledTextField name="specialities" label="Especialidades" placeholder="Yoga, Gimnasia" />
+      {/* input para seleccionar administrador */}
       <LabeledSelectField
         name="adminId"
         label="Administrador"

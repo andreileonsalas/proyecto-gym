@@ -1,26 +1,16 @@
 import { Link, useRouter, useMutation, BlitzPage, Routes } from "blitz"
-import { useDisclosure, Button } from "@chakra-ui/react"
-import { AiOutlinePlusCircle } from "react-icons/ai"
-import CoreModal from "app/core/components/CoreModal"
-import { RoomSessionForm, FORM_ERROR } from "app/room-sessions/components/RoomSessionForm"
+import Layout from "app/core/layouts/Layout"
 import createRoomSession from "app/room-sessions/mutations/createRoomSession"
+import { RoomSessionForm, FORM_ERROR } from "app/room-sessions/components/RoomSessionForm"
 
-export const SessionCreateModal = () => {
+const NewRoomSessionPage: BlitzPage = () => {
   const router = useRouter()
   const [createRoomSessionMutation] = useMutation(createRoomSession)
-  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
-    <CoreModal
-      isOpen={isOpen}
-      onClose={onClose}
-      onOpen={onOpen}
-      title="Crear sesión"
-      trigger={
-        <Button colorScheme="blue" size="sm" variant="outline" leftIcon={<AiOutlinePlusCircle />}>
-          Crear sesión
-        </Button>
-      }
-    >
+    <div>
+      <h1>Create New RoomSession</h1>
+
       <RoomSessionForm
         submitText="Create RoomSession"
         // TODO use a zod schema for form validation
@@ -40,8 +30,17 @@ export const SessionCreateModal = () => {
           }
         }}
       />
-    </CoreModal>
+
+      <p>
+        <Link href={Routes.RoomSessionsPage()}>
+          <a>RoomSessions</a>
+        </Link>
+      </p>
+    </div>
   )
 }
 
-export default SessionCreateModal
+NewRoomSessionPage.authenticate = true
+NewRoomSessionPage.getLayout = (page) => <Layout title={"Create New RoomSession"}>{page}</Layout>
+
+export default NewRoomSessionPage
