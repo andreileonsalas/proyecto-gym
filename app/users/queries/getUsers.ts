@@ -17,7 +17,15 @@ export default resolver.pipe(
       skip,
       take,
       count: () => db.user.count({ where }),
-      query: (paginateArgs) => db.user.findMany({ ...paginateArgs, where, orderBy }),
+      query: (paginateArgs) =>
+        db.user.findMany({
+          ...paginateArgs,
+          where,
+          orderBy,
+          select: {
+            id: true,
+          },
+        }),
     })
 
     return {

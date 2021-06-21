@@ -13,7 +13,7 @@ type Props = {
 
 export const SectionCard: FC<Props> = (props) => {
   return (
-    <Box backgroundColor="white" boxShadow="base" rounded="md" overflow="hidden">
+    <Box cursor="pointer" backgroundColor="white" boxShadow="base" rounded="md" overflow="hidden">
       <Flex borderColor="gray.200" direction="column" overflowWrap="break-word">
         <Image src={props.photo} alt="Foto" h="60" objectFit="cover" />
         <Box px="6" py="5">

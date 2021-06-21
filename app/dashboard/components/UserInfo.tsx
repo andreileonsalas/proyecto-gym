@@ -25,7 +25,7 @@ export const UserInfo = () => {
             ml="0.5rem"
             cursor="pointer"
             alt={user.name}
-            src=""
+            src={user.photo || ""}
             borderWidth="1px"
             borderColor="white"
           />

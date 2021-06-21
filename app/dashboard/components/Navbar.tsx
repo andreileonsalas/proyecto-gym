@@ -13,6 +13,7 @@ import { GiCubes } from "react-icons/gi"
 import { BiTimer } from "react-icons/bi"
 import { AiOutlineMenu } from "react-icons/ai"
 import { RiDashboardLine } from "react-icons/ri"
+import { FiUsers } from "react-icons/fi"
 import NavbarButton from "./NavbarButton"
 import UserInfo from "./UserInfo"
 
@@ -66,6 +67,7 @@ export const Navbar = () => {
 const NavItems = () => (
   <>
     <NavbarButton text="Inicio" Icon={RiDashboardLine} href={Routes.Home()} />
+    <NavbarButton text="Usuarios" Icon={FiUsers} href={Routes.UsersPage()} authenticated={true} />
     <NavbarButton text="Salas" Icon={GiCubes} href={Routes.RoomsPage()} authenticated={true} />
     <NavbarButton text="Sesiones" Icon={BiTimer} href={Routes.RoomSessionsPage()} />
   </>
