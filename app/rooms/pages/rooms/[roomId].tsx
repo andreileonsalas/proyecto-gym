@@ -20,7 +20,7 @@ export const Room = () => {
       <Section title={room.name} extraData={<RoomEditModal />}>
         <SectionHero image={room.photo}>
           <SectionDetails
-            title={`Detalles la sala ${room.name}`}
+            title={`Detalles de la sala ${room.name}`}
             items={[
               { name: "Abre:", value: room.schedule.opens.toLocaleTimeString() },
               { name: "Cierra:", value: room.schedule.closes.toLocaleTimeString() },

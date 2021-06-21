@@ -35,6 +35,11 @@ export default resolver.pipe(resolver.zod(GetRoomSession), resolver.authorize(),
       scheduleId: true,
       specialities: true,
       updatedAt: true,
+      RoomSessionReservation: {
+        select: {
+          id: true,
+        },
+      },
     },
   })
 

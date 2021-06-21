@@ -4,16 +4,21 @@ import * as z from "zod"
 
 const DeleteRoomSessionReservation = z
   .object({
-    id: z.number(),
+    sessionId: z.number(),
   })
   .nonstrict()
 
 export default resolver.pipe(
   resolver.zod(DeleteRoomSessionReservation),
   resolver.authorize(),
-  async ({ id }) => {
+  async (input, ctx) => {
     // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-    const roomSessionReservation = await db.roomSessionReservation.deleteMany({ where: { id } })
+    const roomSessionReservation = await db.roomSessionReservation.deleteMany({
+      where: {
+        sessionId: input.sessionId,
+        userId: ctx.session.userId,
+      },
+    })
 
     return roomSessionReservation
   }

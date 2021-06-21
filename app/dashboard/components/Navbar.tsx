@@ -70,7 +70,6 @@ const NavItems = () => (
     <NavbarButton text="Usuarios" Icon={FiUsers} href={Routes.UsersPage()} authenticated={true} />
     <NavbarButton text="Salas" Icon={GiCubes} href={Routes.RoomsPage()} authenticated={true} />
     <NavbarButton text="Sesiones" Icon={BiTimer} href={Routes.RoomSessionsPage()} />
-    <NavbarButton text="Reservaciones" Icon={BiTimer} href={Routes.RoomSessionReservationsPage()} />
   </>
 )
 
