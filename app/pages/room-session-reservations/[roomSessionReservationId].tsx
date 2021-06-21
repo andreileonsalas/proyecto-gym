@@ -1,12 +1,12 @@
 import { Suspense } from "react"
 import { Head, Link, useRouter, useQuery, useParam, BlitzPage, useMutation, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
-import getRoomSessionReservation from "app/room-session-reservations/queries/getRoomSessionReservation"
-import deleteRoomSessionReservation from "app/room-session-reservations/mutations/deleteRoomSessionReservation"
+import getRoomSessionReservation from "app/reservations/queries/getRoomSessionReservation"
+import deleteRoomSessionReservation from "app/reservations/mutations/deleteRoomSessionReservation"
 import Section from "app/core/sections/Section"
 import SectionHero from "app/core/sections/SectionHero"
 import SectionDetails from "app/core/sections/SectionDetails"
-import SessionCreateModal from "app/room-sessions/modals/SessionCreateModal"
+import SessionCreateModal from "app/sessions/modals/SessionCreateModal"
 
 export const RoomSessionReservation = () => {
   const router = useRouter()

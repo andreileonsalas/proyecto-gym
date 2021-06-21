@@ -1,5 +1,5 @@
 import { useParam, useQuery } from "blitz"
-import RoomSessionEditModal from "app/room-sessions/modals/RoomSessionEditModal"
+import RoomSessionEditModal from "app/sessions/modals/RoomSessionEditModal"
 import getRoomSessions from "../queries/getRoomSessions"
 
 export const RoomSessionByRomm = () => {

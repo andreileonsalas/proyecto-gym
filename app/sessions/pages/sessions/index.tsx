@@ -1,8 +1,8 @@
-import React, { Suspense } from "react"
+import { Suspense } from "react"
 import { Head, BlitzPage } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import Section from "app/core/sections/Section"
-import RoomSessionAll from "app/room-sessions/components/RoomSessionAll"
+import RoomSessionAll from "app/sessions/components/RoomSessionAll"
 
 export const RoomSessionsList = () => {
   return (

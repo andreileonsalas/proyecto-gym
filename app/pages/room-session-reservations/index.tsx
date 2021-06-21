@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import { Head, Link, usePaginatedQuery, useRouter, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
-import getRoomSessionReservations from "app/room-session-reservations/queries/getRoomSessionReservations"
+import getRoomSessionReservations from "app/reservations/queries/getRoomSessionReservations"
 import SectionCard from "app/core/sections/SectionCard"
 import { Box } from "@chakra-ui/layout"
 import Section from "app/core/sections/Section"

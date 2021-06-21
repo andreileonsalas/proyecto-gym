@@ -1,10 +1,10 @@
 import { Link, useRouter, useMutation, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
-import createRoomSessionReservation from "app/room-session-reservations/mutations/createRoomSessionReservation"
+import createRoomSessionReservation from "app/reservations/mutations/createRoomSessionReservation"
 import {
   RoomSessionReservationForm,
   FORM_ERROR,
-} from "app/room-session-reservations/components/RoomSessionReservationForm"
+} from "app/reservations/components/RoomSessionReservationForm"
 
 const NewRoomSessionReservationPage: BlitzPage = () => {
   const router = useRouter()
