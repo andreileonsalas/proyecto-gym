@@ -13,6 +13,7 @@ export const UserCreateValidations = z
     diseases: z.string().optional(),
     medicines: z.string().optional(),
     emergencyContacts: z.string().optional(),
+    finishAt: z.string().optional(),
   })
   .nonstrict()
 
@@ -25,6 +26,7 @@ export const UserEditAdminValidations = z.object({
 
 export const UserEditInstructorValidations = UserEditAdminValidations.extend({
   specialities: z.string(),
+  finishAt: z.string().optional(),
 })
 
 export const UserEditClientValidations = UserEditAdminValidations.extend({

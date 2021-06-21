@@ -13,6 +13,7 @@ export default resolver.pipe(
         photo: input.photo,
         email: input.email,
         specialities: input.specialities.split(", "),
+        finishAt: input.finishAt ? new Date(input.finishAt) : null,
       },
     })
 

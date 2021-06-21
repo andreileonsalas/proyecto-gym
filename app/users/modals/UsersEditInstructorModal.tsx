@@ -48,6 +48,7 @@ export const UsersEditInstructorModal: FC<Props> = (props) => {
           email: user.email,
           photo: user.photo || "",
           specialities: user.specialities.join(", "),
+          finishAt: user.finishAt ? user.finishAt.toLocaleDateString() : undefined,
         }}
         onSubmit={async (values) => {
           try {
@@ -69,6 +70,11 @@ export const UsersEditInstructorModal: FC<Props> = (props) => {
         <LabeledTextField name="email" label="Email" placeholder="alguien@itcr.ac.cr" />
         <LabeledTextField name="photo" label="Foto" placeholder="https://via.placeholder.com/150" />
         <LabeledTextField name="specialities" label="Especialidades" placeholder="Yoga, Gimnasia" />
+        <LabeledTextField
+          name="finishAt"
+          label="Fecha de finalización del contrato"
+          placeholder="12/30/2021"
+        />
       </Form>
     </CoreModal>
   )

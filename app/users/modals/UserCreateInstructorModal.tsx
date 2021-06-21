@@ -56,6 +56,11 @@ export const UsersEditAdminModal = () => {
           label="Especialidades (separadas por ,)"
           placeholder="Yoga, Gimnasia"
         />
+        <LabeledTextField
+          name="finishAt"
+          label="Fecha de finalización del contrato"
+          placeholder="12/30/2021"
+        />
       </Form>
     </CoreModal>
   )

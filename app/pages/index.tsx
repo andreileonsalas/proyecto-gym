@@ -1,4 +1,4 @@
-import { BlitzPage, useRouter } from "blitz"
+import { BlitzPage } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import Section from "app/core/sections/Section"
 import RoomSessionAll from "app/room-sessions/components/RoomSessionAll"
