@@ -18,7 +18,10 @@ export default resolver.pipe(
     // TODO: in multi-tenant app, you must add validation to ensure correct tenant
     const roomSessionReservation = await db.roomSessionReservation.update({
       where: { id },
-      data,
+      data: {
+        paymentType: data.paymentType,
+        totalHours: data.totalHours,
+      },
     })
 
     return roomSessionReservation

@@ -16,6 +16,22 @@ export default resolver.pipe(
       where: { id },
       include: { session: true },
     })
+    //para hacer un select anidado
+    // const roomSessionReservation = await db.roomSessionReservation.findFirst({
+    //   where: { id },
+    //   select: {
+    //     session: {
+    //       where: { id },
+    //       select: {
+    //         user: {
+    //           select: {
+    //             email: true
+    //           }
+    //         }
+    //       }
+    //     }
+    //   },
+    // })
 
     if (!roomSessionReservation) throw new NotFoundError()
 

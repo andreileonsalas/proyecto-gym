@@ -5,6 +5,8 @@ import * as z from "zod"
 export const UpdateRoomSession = z
   .object({
     id: z.number(),
+    name: z.string(),
+    photo: z.string(),
     specialities: z.string(),
     maxParticipants: z.number(),
     price: z.number(),
