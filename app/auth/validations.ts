@@ -5,6 +5,7 @@ const password = z.string().min(10, "Ingrese mínimo 10 caracteres.").max(100)
 export const Signup = z.object({
   name: z.string(),
   email: z.string().email("El email es inválido."),
+  photo: z.string(),
   password,
 })
 
