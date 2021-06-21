@@ -34,7 +34,7 @@ export const UsersEditInstructorModal: FC<Props> = (props) => {
             user.name
           } tienes especialidades en las modalidades de ${user.specialities.join(", ")}.`}
           tag={user.role}
-          duration={`${user.sessions.length} sesiones atendidas`}
+          duration={`${user.specialities.length} especialidades`}
           helper={`Este miembro se unió el ${user.createdAt.toLocaleDateString()}`}
         />
       }

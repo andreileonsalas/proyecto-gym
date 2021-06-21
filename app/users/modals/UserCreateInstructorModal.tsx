@@ -14,24 +14,25 @@ export const UsersEditAdminModal = () => {
 
   return (
     <CoreModal
-      title="Crear Administrador"
+      title="Crear Instructor"
       isOpen={isOpen}
       onClose={onClose}
       onOpen={onOpen}
       trigger={
         <Button colorScheme="blue" size="sm" variant="outline" leftIcon={<AiOutlinePlusCircle />}>
-          Agregar administrador
+          Agregar instructor
         </Button>
       }
     >
       <Form
-        submitText="Crear administrador"
+        submitText="Crear instructor"
         schema={UserCreateValidations}
         initialValues={{
           email: "",
           name: "",
           photo: "",
-          role: "ADMIN",
+          role: "INSTRUCTOR",
+          specialities: "",
         }}
         onSubmit={async (values) => {
           try {
@@ -50,6 +51,11 @@ export const UsersEditAdminModal = () => {
         <LabeledTextField name="name" label="Nombre" placeholder="Andrés Chacón" />
         <LabeledTextField name="email" label="Email" placeholder="alguien@itcr.ac.cr" />
         <LabeledTextField name="photo" label="Foto" placeholder="https://via.placeholder.com/150" />
+        <LabeledTextField
+          name="specialities"
+          label="Especialidades (separadas por ,)"
+          placeholder="Yoga, Gimnasia"
+        />
       </Form>
     </CoreModal>
   )

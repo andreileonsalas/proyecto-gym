@@ -9,6 +9,7 @@ export const UserCreateValidations = z
       .max(31, "Ingrese máximo 31 caracteres."),
     photo: z.string().url("Ingrese una url válida."),
     role: z.enum(["ADMIN", "CLIENT", "INSTRUCTOR"]),
+    specialities: z.string().optional(),
   })
   .nonstrict()
 

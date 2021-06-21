@@ -8,6 +8,7 @@ import Section from "app/core/sections/Section"
 import UsersEditAdminModal from "app/users/modals/UsersEditAdminModal"
 import UserCreateAdminModal from "app/users/modals/UserCreateAdminModal"
 import UsersEditInstructorModal from "app/users/modals/UsersEditInstructorModal"
+import UserCreateInstructorModal from "app/users/modals/UserCreateInstructorModal"
 
 export const UsersList = ({ role }: { role: Role }) => {
   const [{ users }] = usePaginatedQuery(getUsers, {
@@ -41,7 +42,7 @@ const UsersPage: BlitzPage = () => {
           <Section title="Administradores" extraData={<UserCreateAdminModal />}>
             <UsersList role="ADMIN" />
           </Section>
-          <Section title="Instructores">
+          <Section title="Instructores" extraData={<UserCreateInstructorModal />}>
             <UsersList role="INSTRUCTOR" />
           </Section>
           <Section title="Clientes">
