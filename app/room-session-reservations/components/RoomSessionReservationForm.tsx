@@ -12,7 +12,6 @@ export function RoomSessionReservationForm<S extends z.ZodType<any, any>>(props:
       <LabeledSelectField
         name="paymentType"
         label="paymentType"
-        placeholder="Seleccione un tipo de pago"
         options={[
           { value: "BEFORE_HAND", label: "BEFORE_HAND" },
           { value: "IN_TIME", label: "IN_TIME" },

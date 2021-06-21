@@ -4,6 +4,8 @@ import * as z from "zod"
 
 const CreateRoomSession = z
   .object({
+    name: z.string(),
+    photo: z.string(),
     specialities: z.string(),
     maxParticipants: z.number(),
     price: z.number(),
@@ -17,12 +19,9 @@ export default resolver.pipe(
   resolver.zod(CreateRoomSession),
   resolver.authorize(),
   async (input) => {
-    // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-    // const roomSession = await db.roomSession.create({ data: input })
+    //TODO: in multi-tenant app, you must add validation to ensure correct tenant
+    const roomSession = await db.roomSession.create({ data: input })
 
-    // return roomSession
-    return {
-      id: 1,
-    }
+    return roomSession
   }
 )

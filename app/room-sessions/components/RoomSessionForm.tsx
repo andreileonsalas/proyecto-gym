@@ -7,6 +7,8 @@ export function RoomSessionForm<S extends z.ZodType<any, any>>(props: FormProps<
   return (
     <Form<S> {...props}>
       <LabeledTextField name="specialities" label="specialities" placeholder="specialities" />
+      <LabeledTextField name="name" label="name" placeholder="specialities" />
+      <LabeledTextField name="photo" label="photo" placeholder="specialities" />
       <LabeledTextField
         name="maxParticipants"
         label="maxParticipants"

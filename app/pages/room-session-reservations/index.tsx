@@ -2,6 +2,9 @@ import { Suspense } from "react"
 import { Head, Link, usePaginatedQuery, useRouter, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getRoomSessionReservations from "app/room-session-reservations/queries/getRoomSessionReservations"
+import SectionCard from "app/core/sections/SectionCard"
+import { Box } from "@chakra-ui/layout"
+import Section from "app/core/sections/Section"
 
 const ITEMS_PER_PAGE = 100
 
@@ -18,28 +21,30 @@ export const RoomSessionReservationsList = () => {
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
 
   return (
-    <div>
-      <ul>
-        {roomSessionReservations.map((roomSessionReservation) => (
-          <li key={roomSessionReservation.id}>
+    <Section title="Sesiones">
+      <Box display="flex" mt="4" w="100%" listStyleType="none">
+        {roomSessionReservations.map((roomSessionReservations) => (
+          <li key={roomSessionReservations.id}>
             <Link
               href={Routes.ShowRoomSessionReservationPage({
-                roomSessionReservationId: roomSessionReservation.id,
+                roomSessionReservationId: roomSessionReservations.id,
               })}
             >
-              <a>{roomSessionReservation.id}</a>
+              <a>
+                <SectionCard
+                  photo={"http://localhost:3000/img/gym-logo.png"}
+                  tag={roomSessionReservations.totalHours.toString()}
+                  title={`Sala: ${roomSessionReservations.id}`}
+                  description={`El precio de la reservacion s ${roomSessionReservations.totalHours} la cual el estado con respecto al pago es de:  ${roomSessionReservations.paid}. Y el tipo de pago es  ${roomSessionReservations.paymentType}`}
+                  duration={`${roomSessionReservations.totalHours}`}
+                  helper={roomSessionReservations.totalHours.toString()}
+                />
+              </a>
             </Link>
           </li>
         ))}
-      </ul>
-
-      <button disabled={page === 0} onClick={goToPreviousPage}>
-        Previous
-      </button>
-      <button disabled={!hasMore} onClick={goToNextPage}>
-        Next
-      </button>
-    </div>
+      </Box>
+    </Section>
   )
 }
 
