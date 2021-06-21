@@ -23,6 +23,8 @@ export default resolver.pipe(
           where,
           orderBy,
           select: {
+            name: true,
+            photo: true,
             createdAt: true,
             id: true,
             instructor: {
