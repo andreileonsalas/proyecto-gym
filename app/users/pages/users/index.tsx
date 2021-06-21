@@ -1,11 +1,12 @@
 import { Suspense } from "react"
 import { Role } from "db"
-import { Head, Link, usePaginatedQuery, useRouter, BlitzPage, Routes } from "blitz"
+import { Head, usePaginatedQuery, BlitzPage } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getUsers from "app/users/queries/getUsers"
 import { Text } from "@chakra-ui/layout"
 import Section from "app/core/sections/Section"
 import UsersEditAdminModal from "app/users/modals/UsersEditAdminModal"
+import UserCreateAdminModal from "app/users/modals/UserCreateAdminModal"
 
 export const UsersList = ({ role }: { role: Role }) => {
   const [{ users }] = usePaginatedQuery(getUsers, {
@@ -33,7 +34,7 @@ const UsersPage: BlitzPage = () => {
 
       <div>
         <Suspense fallback={<div>Cargando...</div>}>
-          <Section title="Administradores">
+          <Section title="Administradores" extraData={<UserCreateAdminModal />}>
             <UsersList role="ADMIN" />
           </Section>
           <Section title="Instructores">
