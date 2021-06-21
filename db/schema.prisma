@@ -18,6 +18,7 @@ model User {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   name           String?
+  photo          String?
   email          String   @unique
   hashedPassword String?
   role           Role     @default(CLIENT)
@@ -114,6 +115,8 @@ model RoomSession {
   id              Int      @id @default(autoincrement())
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  name            String
+  photo           String
   specialities    String[]
   maxParticipants Int
   price           Float

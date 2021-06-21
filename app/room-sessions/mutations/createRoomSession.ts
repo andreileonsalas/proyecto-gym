@@ -18,8 +18,11 @@ export default resolver.pipe(
   resolver.authorize(),
   async (input) => {
     // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-    const roomSession = await db.roomSession.create({ data: input })
+    // const roomSession = await db.roomSession.create({ data: input })
 
-    return roomSession
+    // return roomSession
+    return {
+      id: 1,
+    }
   }
 )
