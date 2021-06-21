@@ -7,6 +7,7 @@ import { Text } from "@chakra-ui/layout"
 import Section from "app/core/sections/Section"
 import UsersEditAdminModal from "app/users/modals/UsersEditAdminModal"
 import UserCreateAdminModal from "app/users/modals/UserCreateAdminModal"
+import UsersEditInstructorModal from "app/users/modals/UsersEditInstructorModal"
 
 export const UsersList = ({ role }: { role: Role }) => {
   const [{ users }] = usePaginatedQuery(getUsers, {
@@ -18,9 +19,12 @@ export const UsersList = ({ role }: { role: Role }) => {
   return (
     <>
       {users.length === 0 && <Text>No hay miembros con el role de {role}</Text>}
-      {users.map((user) => (
-        <UsersEditAdminModal key={user.id} userId={user.id} />
-      ))}
+      {users.map((user) => {
+        if (role === "ADMIN") return <UsersEditAdminModal key={user.id} userId={user.id} />
+
+        if (role === "INSTRUCTOR")
+          return <UsersEditInstructorModal key={user.id} userId={user.id} />
+      })}
     </>
   )
 }
