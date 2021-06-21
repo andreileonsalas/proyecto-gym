@@ -33,7 +33,6 @@ export const EditRoomSession = () => {
               const updated = await updateRoomSessionMutation({
                 ...values,
               })
-              await setQueryData(updated)
               router.push(Routes.ShowRoomSessionPage({ roomSessionId: updated.id }))
             } catch (error) {
               console.error(error)
