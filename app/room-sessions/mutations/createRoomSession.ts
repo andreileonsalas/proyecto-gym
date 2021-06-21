@@ -1,26 +1,37 @@
 import { resolver } from "blitz"
 import db from "db"
-import * as z from "zod"
-
-const CreateRoomSession = z
-  .object({
-    name: z.string(),
-    photo: z.string(),
-    specialities: z.string(),
-    maxParticipants: z.number(),
-    price: z.number(),
-    roomId: z.number(),
-    instructorId: z.number(),
-    scheduleId: z.number(),
-  })
-  .nonstrict()
+import { RoomSessionCreateValidations } from "../validations"
 
 export default resolver.pipe(
-  resolver.zod(CreateRoomSession),
-  resolver.authorize(),
+  resolver.zod(RoomSessionCreateValidations),
+  resolver.authorize("ADMIN"),
   async (input) => {
-    //TODO: in multi-tenant app, you must add validation to ensure correct tenant
-    const roomSession = await db.roomSession.create({ data: input })
+    const roomSession = await db.roomSession.create({
+      data: {
+        name: input.name,
+        maxParticipants: input.maxParticipants,
+        photo: input.photo,
+        price: input.price,
+        specialities: input.specialities,
+        schedule: {
+          create: {
+            closes: new Date(`1970-01-01 ${input.closesAt}:30`),
+            opens: new Date(`1970-01-01 ${input.opensAt}:30`),
+            weekDays: input.openDays.split(",").map((x) => x.trim()),
+          },
+        },
+        room: {
+          connect: {
+            id: +input.roomId,
+          },
+        },
+        instructor: {
+          connect: {
+            id: +input.instructorId,
+          },
+        },
+      },
+    })
 
     return roomSession
   }

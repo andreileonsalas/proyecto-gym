@@ -6,7 +6,7 @@ import deleteRoomSession from "app/room-sessions/mutations/deleteRoomSession"
 import Section from "app/core/sections/Section"
 import SectionHero from "app/core/sections/SectionHero"
 import SectionDetails from "app/core/sections/SectionDetails"
-import SessionCreateModal from "app/sessions/modals/SessionCreateModal"
+import SessionCreateModal from "app/room-sessions/modals/SessionCreateModal"
 
 export const RoomSession = () => {
   const router = useRouter()

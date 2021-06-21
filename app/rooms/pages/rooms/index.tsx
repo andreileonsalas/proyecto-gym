@@ -20,28 +20,24 @@ export const RoomsList = () => {
 
   return (
     <Section title="Salas" extraData={<RoomCreateModal />}>
-      <Box display="flex" mt="4" w="100%" listStyleType="none">
-        {rooms.map((room) => (
-          <li key={room.id}>
-            <Link href={Routes.ShowRoomPage({ roomId: room.id })}>
-              <a>
-                <SectionCard
-                  photo={room.photo}
-                  tag={room.specialities.join(", ")}
-                  title={room.name}
-                  description={`Tenemos una capacidad de ${
-                    room.maxCapacity
-                  } pero estamos aceptando solo ${
-                    room.maxCapacityAllowed
-                  }. Además cubrimos las especialidades de ${room.specialities.join(", ")}`}
-                  helper={`Administrador por ${room.admin.name}`}
-                  duration={`${room.schedule.opens.toLocaleTimeString()} - ${room.schedule.closes.toLocaleTimeString()}`}
-                />
-              </a>
-            </Link>
-          </li>
-        ))}
-      </Box>
+      {rooms.map((room) => (
+        <Link key={room.id} href={Routes.ShowRoomPage({ roomId: room.id })}>
+          <a>
+            <SectionCard
+              photo={room.photo}
+              tag={room.specialities.join(", ")}
+              title={room.name}
+              description={`Tenemos una capacidad de ${
+                room.maxCapacity
+              } pero estamos aceptando solo ${
+                room.maxCapacityAllowed
+              }. Además cubrimos las especialidades de ${room.specialities.join(", ")}`}
+              helper={`Administrador por ${room.admin.name}`}
+              duration={`${room.schedule.opens.toLocaleTimeString()} - ${room.schedule.closes.toLocaleTimeString()}`}
+            />
+          </a>
+        </Link>
+      ))}
     </Section>
   )
 }

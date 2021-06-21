@@ -8,7 +8,7 @@ import Section from "app/core/sections/Section"
 import RoomEditModal from "app/rooms/modals/RoomEditModal"
 import SectionHero from "app/core/sections/SectionHero"
 import SectionDetails from "app/core/sections/SectionDetails"
-import SessionCreateModal from "app/sessions/modals/SessionCreateModal"
+import SessionCreateModal from "app/room-sessions/modals/SessionCreateModal"
 
 export const Room = () => {
   const roomId = useParam("roomId", "number")

@@ -1,12 +1,13 @@
-import { Link, useRouter, useMutation, BlitzPage, Routes } from "blitz"
+import { Link, useRouter, useMutation, BlitzPage, Routes, useParam } from "blitz"
 import { useDisclosure, Button } from "@chakra-ui/react"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import CoreModal from "app/core/components/CoreModal"
 import { RoomSessionForm, FORM_ERROR } from "app/room-sessions/components/RoomSessionForm"
 import createRoomSession from "app/room-sessions/mutations/createRoomSession"
+import { RoomSessionCreateValidations } from "../validations"
 
 export const SessionCreateModal = () => {
-  const router = useRouter()
+  const roomId = useParam("roomId")
   const [createRoomSessionMutation] = useMutation(createRoomSession)
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
@@ -22,16 +23,22 @@ export const SessionCreateModal = () => {
       }
     >
       <RoomSessionForm
-        submitText="Create RoomSession"
-        // TODO use a zod schema for form validation
-        //  - Tip: extract mutation's schema into a shared `validations.ts` file and
-        //         then import and use it here
-        // schema={CreateRoomSession}
-        // initialValues={{}}
+        submitText="Crear sesión"
+        schema={RoomSessionCreateValidations}
+        initialValues={{
+          name: "",
+          closesAt: "",
+          photo: "",
+          instructorId: "",
+          roomId: roomId?.toString(),
+          specialities: "",
+          openDays: "",
+          opensAt: "",
+        }}
         onSubmit={async (values) => {
           try {
-            const roomSession = await createRoomSessionMutation(values)
-            router.push(`/room-sessions/${roomSession.id}`)
+            await createRoomSessionMutation(values)
+            onClose()
           } catch (error) {
             console.error(error)
             return {
