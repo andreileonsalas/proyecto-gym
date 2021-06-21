@@ -46,7 +46,7 @@ const RoomsPage: BlitzPage = () => {
   return (
     <>
       <Head>
-        <title>Rooms</title>
+        <title>Salas</title>
       </Head>
 
       <div>
