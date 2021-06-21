@@ -9,6 +9,8 @@ import UsersEditAdminModal from "app/users/modals/UsersEditAdminModal"
 import UserCreateAdminModal from "app/users/modals/UserCreateAdminModal"
 import UsersEditInstructorModal from "app/users/modals/UsersEditInstructorModal"
 import UserCreateInstructorModal from "app/users/modals/UserCreateInstructorModal"
+import UserCreateClientModal from "app/users/modals/UserCreateClientModal"
+import UsersEditClientModal from "app/users/modals/UsersEditClientModal"
 
 export const UsersList = ({ role }: { role: Role }) => {
   const [{ users }] = usePaginatedQuery(getUsers, {
@@ -25,6 +27,8 @@ export const UsersList = ({ role }: { role: Role }) => {
 
         if (role === "INSTRUCTOR")
           return <UsersEditInstructorModal key={user.id} userId={user.id} />
+
+        if (role === "CLIENT") return <UsersEditClientModal key={user.id} userId={user.id} />
       })}
     </>
   )
@@ -45,7 +49,7 @@ const UsersPage: BlitzPage = () => {
           <Section title="Instructores" extraData={<UserCreateInstructorModal />}>
             <UsersList role="INSTRUCTOR" />
           </Section>
-          <Section title="Clientes">
+          <Section title="Clientes" extraData={<UserCreateClientModal />}>
             <UsersList role="CLIENT" />
           </Section>
         </Suspense>

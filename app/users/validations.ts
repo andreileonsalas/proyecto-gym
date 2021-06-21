@@ -10,6 +10,9 @@ export const UserCreateValidations = z
     photo: z.string().url("Ingrese una url válida."),
     role: z.enum(["ADMIN", "CLIENT", "INSTRUCTOR"]),
     specialities: z.string().optional(),
+    diseases: z.string().optional(),
+    medicines: z.string().optional(),
+    emergencyContacts: z.string().optional(),
   })
   .nonstrict()
 
@@ -22,4 +25,10 @@ export const UserEditAdminValidations = z.object({
 
 export const UserEditInstructorValidations = UserEditAdminValidations.extend({
   specialities: z.string(),
+})
+
+export const UserEditClientValidations = UserEditAdminValidations.extend({
+  diseases: z.string(),
+  medicines: z.string(),
+  emergencyContacts: z.string(),
 })
