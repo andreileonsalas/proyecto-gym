@@ -39,7 +39,6 @@ export const EditRoomSessionReservation = () => {
                 id: roomSessionReservation.id,
                 ...values,
               })
-              await setQueryData(updated)
               router.push(
                 Routes.ShowRoomSessionReservationPage({ roomSessionReservationId: updated.id })
               )
