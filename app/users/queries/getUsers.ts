@@ -24,6 +24,8 @@ export default resolver.pipe(
           orderBy,
           select: {
             id: true,
+            name: true,
+            email: true,
           },
         }),
     })
