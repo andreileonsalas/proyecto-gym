@@ -29,6 +29,8 @@ export const UsersList = ({ role }: { role: Role }) => {
           return <UsersEditInstructorModal key={user.id} userId={user.id} />
 
         if (role === "CLIENT") return <UsersEditClientModal key={user.id} userId={user.id} />
+
+        return null
       })}
     </>
   )

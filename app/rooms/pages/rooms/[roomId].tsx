@@ -10,7 +10,6 @@ import SectionHero from "app/core/sections/SectionHero"
 import SectionDetails from "app/core/sections/SectionDetails"
 import SessionCreateModal from "app/sessions/modals/SessionCreateModal"
 import RoomSessionByRoom from "app/sessions/components/RoomSessionByRoom"
-import RoomSessionUser from "app/sessions/components/RoomSessionUser"
 
 export const Room = () => {
   const roomId = useParam("roomId", "number")

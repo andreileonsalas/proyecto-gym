@@ -1,7 +1,6 @@
 import { Form, FormProps } from "app/core/components/Form"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import LabeledSelectField from "app/core/components/LabeledSelectField"
-import { Flex } from "@chakra-ui/react"
 import React from "react"
 import * as z from "zod"
 export { FORM_ERROR } from "app/core/components/Form"

@@ -8,9 +8,6 @@ import * as z from "zod"
 export { FORM_ERROR } from "app/core/components/Form"
 
 export default function RoomForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
-  {
-    /* consigue todos los usuarios administradores */
-  }
   const [users] = useQuery(getUsers, {
     where: {
       role: "ADMIN",

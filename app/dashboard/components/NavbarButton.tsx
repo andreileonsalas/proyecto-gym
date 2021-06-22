@@ -16,7 +16,7 @@ export const NavbarButton: FC<Props> = (props) => {
   const user = useCurrentUser()
 
   let isActive = router.pathname.includes(props.href?.pathname)
-  if (props.href?.pathname === "/") isActive = router.pathname == props.href?.pathname
+  if (props.href?.pathname === "/") isActive = router.pathname === props.href?.pathname
 
   if (props.authenticated && !user) return null
 
