@@ -1,5 +1,6 @@
 import { Suspense } from "react"
 import { Head, BlitzPage } from "blitz"
+import { Spinner } from "@chakra-ui/react"
 import Layout from "app/core/layouts/Layout"
 import Section from "app/core/sections/Section"
 import RoomSessionAll from "app/sessions/components/RoomSessionAll"
@@ -20,7 +21,7 @@ const RoomSessionsPage: BlitzPage = () => {
       </Head>
 
       <div>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Spinner />}>
           <RoomSessionsList />
         </Suspense>
       </div>

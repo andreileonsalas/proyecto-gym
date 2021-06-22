@@ -18,7 +18,7 @@ export const SectionDetails: FC<Props> = (props) => {
         <List spacing={3}>
           {props.items.map((item, i) => (
             <ListItem key={i}>
-              <Text fontWeight="600" fontSize="xl" as="span" mr="1">
+              <Text fontWeight="600" fontSize="xl" mr="1">
                 {item.name}
               </Text>
               <Text as="span" fontSize="lg" color="gray.600">

@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import { Link, useQuery, useParam, BlitzPage, Routes } from "blitz"
-import { Box, Link as LinkUI } from "@chakra-ui/react"
+import { Box, Link as LinkUI, Spinner } from "@chakra-ui/react"
 import { BsArrowLeft } from "react-icons/bs"
 import Layout from "app/core/layouts/Layout"
 import Section from "app/core/sections/Section"
@@ -68,7 +68,7 @@ const ShowSessionPage: BlitzPage = () => {
         </LinkUI>
       </Link>
 
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <Session />
       </Suspense>
     </div>

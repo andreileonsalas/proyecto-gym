@@ -11,7 +11,7 @@ import { ErrorBoundary } from "react-error-boundary"
 import LoginForm from "app/auth/components/LoginForm"
 import { Suspense } from "react"
 
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider, Spinner } from "@chakra-ui/react"
 
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ChakraProvider>
-      <Suspense fallback="Loading...">
+      <Suspense fallback={<Spinner />}>
         <ErrorBoundary
           FallbackComponent={RootErrorFallback}
           resetKeys={[router.asPath]}

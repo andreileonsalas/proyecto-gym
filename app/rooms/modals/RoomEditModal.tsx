@@ -45,6 +45,7 @@ export const RoomEditModal = () => {
           try {
             await updateRoomMutation(values)
             await invalidateQuery(getRooms)
+            await invalidateQuery(getRoom, { id: roomId })
             onClose()
           } catch (error) {
             return {

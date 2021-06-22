@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import { Head, Link, usePaginatedQuery, useRouter, BlitzPage, Routes } from "blitz"
-import { Box } from "@chakra-ui/layout"
+import { Spinner } from "@chakra-ui/react"
 import Layout from "app/core/layouts/Layout"
 import getRooms from "app/rooms/queries/getRooms"
 import Section from "app/core/sections/Section"
@@ -50,7 +50,7 @@ const RoomsPage: BlitzPage = () => {
       </Head>
 
       <div>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Spinner />}>
           <RoomsList />
         </Suspense>
       </div>
